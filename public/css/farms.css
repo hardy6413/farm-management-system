@@ -1,4 +1,4 @@
-section {
+.farms {
     height: 80%;
     display: grid;
     grid-template-rows: 45% 45%;
@@ -69,7 +69,6 @@ section {
 }
 
 .farms > div > div {
-   
     line-height: 1.8em;
     height: 20%;
     padding: 0%;
@@ -78,7 +77,11 @@ section {
     opacity: 0.8;
     color: #846F00;
     margin-top: -0.3em;
-   
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  
 }
 
 

@@ -97,6 +97,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
 }
 
 main {
@@ -145,7 +146,7 @@ ul {
     list-style-type: none;
     color:white;
     font: normal normal normal 600 20px/27px Segoe UI;
-    opacity: 0.8;
+ 
     justify-content: center;
     text-align: center;
     letter-spacing: 0.72px;
@@ -162,10 +163,11 @@ li {
     margin-bottom: 1em;
 }
 
-li:last-child {
+.settings {
     position: absolute;
     bottom: 0;
     width: 100%;
+    
 }
 
 .fa, .fas {
@@ -182,8 +184,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 1em 2em;
-    border-bottom: 2px ridge #D1E9D1;
-    
+    border-bottom: 2px ridge #D1E9D1; 
     
 }
 
