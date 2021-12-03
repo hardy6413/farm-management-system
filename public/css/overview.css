@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    align-content: center;
 }
 
 .navi-button{
@@ -50,7 +52,7 @@
     flex-direction: row;
     justify-content: space-between;
     border-radius: 30px;
-    
+    overflow: auto;
 }
 
 .farm-picture-container{
@@ -124,13 +126,15 @@
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 1em;
     opacity: 0.8;
+    height: 8vh;
 }
 
 li>i{
-    font-size: 1.5em;
+    font-size: 2vh;
     color: #116713;
     margin-right: 1em;
     margin-left: 1em;
+    height: 4vh;
 }
 li>div>p{
     font: normal normal 600 20px/15px Segoe UI;
@@ -142,14 +146,15 @@ li>div>p{
 
 
 li>div>i{
-    font-size:2em;
+    font-size:4vh;
     color: #116713;
     margin-right: 0.3em;
     margin-left: 6px;
 }
 
 #lang{
-    width: 50px;
+    
+
     height: auto;
     border: #116713 solid 2px;
     padding: 0.3em;
@@ -178,3 +183,215 @@ li>div{
     align-items: center;
     justify-content: flex-start;
 }
+
+.workers-list{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+.worker-picture{
+    padding: 1em;
+}
+
+.worker-activity{
+    text-align: center;
+    text-decoration: underline;
+    font: normal normal bold 2.5vh Segoe UI;
+    letter-spacing: 0.3px;
+    color: #19931B;
+    width: auto;
+    
+ 
+}
+
+
+.field-navi-item{
+    margin-left: 1em;
+    opacity: 0.8;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.field-navi-item > .search-field{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    
+}
+
+.field-navi-item> .search-field > form>input{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 1em;
+    letter-spacing: 0.7px;
+    color: #846F00;
+    padding: 0.2em;
+    width: 95%;
+    margin: 0;
+    font: normal normal normal 600 2vh/2em Segoe UI;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5em;
+    
+    
+}
+.field-navi-item> .search-field >form{
+    width: 100%;
+    border: 0;
+    margin-left: 0.3em;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 3em;
+}
+
+
+
+
+
+
+#options{
+    position: relative;
+    top: -266px;
+    left: 168px;
+    color: #19931B;
+    font-size: 3.5vh;
+}
+
+.workers-list-item{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+
+.fields-list-item{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 40%;
+}
+
+
+.fields-list{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.field-picture{
+    margin-top: 1em;
+    overflow: auto;
+    width: 50%;
+    height: 90%;
+}
+
+.field-info{
+    text-align: center;
+    font: normal normal bold 2.5vmin Segoe UI;
+    letter-spacing: 0.3px;
+    color: #846F00;
+    width: auto;
+    margin: 0;
+}
+
+.field-options{
+    font: normal normal bold 2.5vmin Segoe UI;
+    letter-spacing: 0.3px;
+    color: #19931B;
+    text-shadow: 1px 1px 2px #06F87F85, 0 0 1em #06F87F85, 0 0 1.2em #06F87F85;
+    
+}
+
+.field-description-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 1em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 90%;
+    width: 45%;
+}
+
+.delete-icon{
+    width: 5%;
+    height: 10%;
+    margin-top: 1.3em;
+    margin-left: -3em;
+}
+
+#delete-field{
+    color: #19931B;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3.5vw;
+    height: 4vh;
+  }
+  
+
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 2.7vh;
+    width: 26px;
+    left: 4px;
+    bottom: 7px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    justify-content: center;
+    align-self: center;
+  }
+  
+  input:checked + .slider {
+    background-color:  #19931B;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+
+  

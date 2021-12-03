@@ -1,0 +1,180 @@
+.field-data{
+    width:100%;
+    height: 40%;
+    display: flex;
+    overflow: hidden;
+}
+
+.field-data-background{
+    background: #D0E8D1 0% 0% no-repeat padding-box;
+    opacity: 1;
+    height: 100%;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.field-data-info{
+    text-align: left;
+    font: normal normal bold 2.5vmin Segoe UI;
+    letter-spacing: 0.3px;
+    color: #846F00;
+    width: 47%;
+    margin: 0;
+}
+
+.field-data-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 1em;
+    margin-left: 1em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    width: 70%;
+    margin-bottom: 1em;
+}
+
+#field-description-picture{
+    width: 30%;
+    height: 100%;
+    margin-left: 0.5em;
+    overflow: auto;
+}
+
+#field-options-click{
+    width: 47%;
+}
+
+.action-header{
+    display: flex;
+    
+}
+
+.action-info{
+    width: 100%;
+    height: 55%;
+    overflow: auto;
+    margin-top: 0.5em;
+    display: flex;
+}
+
+
+.table-head{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    opacity: 0.8;
+    font: normal normal bold 1.5vmin Segoe UI;
+    letter-spacing: 0.3px;
+    color: #846F00;
+}
+
+.actions-table{
+    margin: 0.5em;
+    margin-bottom: 0;
+    width: 55%;
+    height: 10%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#date{
+    width: 10%;
+}
+
+#action{
+    width: 10%;
+}
+
+#description{
+    width: 30%;
+}
+
+#tick-completed{
+    width: 10%;
+}
+
+.record{
+    letter-spacing: 0.7px;
+    color: #846F00;
+    border: 2px solid #168518;
+    font: normal normal bold 2vmin Segoe UI;
+}
+
+.action-row{
+    height: 10%;
+}
+
+#tick-completed input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+#table-form-control{
+    width: 100%;
+    background: transparent;
+}
+
+
+#tick-completed input:checked ~ .checkmark:after {
+    display: block;
+}
+
+#tick-completed .checkmark:after {
+    width: 6.5px;
+    height: 13px;
+    border: solid #178819;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(
+45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(
+45deg);
+}
+
+
+.action-button{
+    letter-spacing: 0.7px;
+    color: #846F00;
+    font-family: 'Segoe UI';
+    width: 100%;
+    border-radius: 3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-long-description{
+    width: 40%;
+    height: 100%;
+    margin: 0.5em;
+}
+
+.action-buttons-navi{
+    width: 100%;
+    height: 10%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.field-action-button{
+    margin: 0;
+    width: 40%;
+    font: normal normal bold 1.5vmin Segoe UI;
+}
+
+
+.action-description{
+    letter-spacing: 0.7px;
+    color: #846F00;
+    overflow: auto;
+    text-overflow: ellipsis;
+    font: normal normal bold 2vmin Segoe UI;
+    width: 90%;
+    height: 85%;
+}

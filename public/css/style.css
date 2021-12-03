@@ -245,3 +245,12 @@ header {
     height: 100%;
     border: 0;
 }
+
+
+/*to dodalem jak ocs*/
+
+h2{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
