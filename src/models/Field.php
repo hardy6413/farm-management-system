@@ -13,7 +13,7 @@ class Field extends BaseClass{
 
     private float $extraPayment;
 
-    private FarmData $farmData;
+    private Farm $farmData;
 
     private DateTime $addedAt;
 

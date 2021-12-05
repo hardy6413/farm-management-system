@@ -7,6 +7,6 @@ class PersonalData extends BaseClass{
 
     private UserAccount $userAccount;
 
-    private Addres  $addres;
+    private Address  $addres;
 
 }

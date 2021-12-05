@@ -49,13 +49,14 @@ button {
     font-size: 3vh;
 }
 
-input {
+input,textarea{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid gray;
     margin: 1em;
     width: 50%;
-    font-size: 2vh;
+    font-size: 2vmin;
+
 }
 
 @media only screen and (max-device-width: 562px) {
@@ -252,4 +253,76 @@ h2{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+section.create-farm-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80%;
+    padding: 1em;
+    overflow: auto;
+}
+
+.create-farm-form > form{
+    display: flex;
+    flex-direction: column;
+    background: #D0E8D1 0% 0% no-repeat padding-box;
+    width: 70%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 3em;
+}
+
+
+
+#farm-picture{
+    overflow: auto;
+    width: 50%;
+    height: 90%;
+}
+
+
+.farms-item-container{
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    height: 40%;
+}
+
+.farms-item-container>div{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    margin-left: 1.3em;
+    align-items: flex-start;
+    background: #D0E8D1 0% 0% no-repeat padding-box;
+}
+
+.farm-data-info{
+    text-align: left;
+    font: normal normal bold 2.5vmin Segoe UI;
+    letter-spacing: 0.3px;
+    color: #846F00;
+    width: 90%;
+    margin: 0;
+    text-overflow: initial;
+    height: 40%;
+    overflow-wrap: break-word;
+    white-space: normal;
+    padding: 0.5em;
+}
+
+.farms-list-background{
+    opacity: 1;
+    height: 100%;
+    margin: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 30px;
+    overflow: auto;
 }
