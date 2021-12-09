@@ -26,7 +26,6 @@ class FarmController extends AppController
         }
 
 
-//dorobic requiry i dokonczyc
         $this->render('createFarm', ['messages' => $this->messages]);
     }
 

@@ -3,6 +3,10 @@
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/FarmController.php';
+require_once 'src/controllers/FieldController.php';
+require_once 'src/controllers/TaskController.php';
+require_once 'src/controllers/WorkersController.php';
+require_once 'src/controllers/ProfileController.php';
 
 class Router {
 

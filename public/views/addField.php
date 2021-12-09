@@ -57,21 +57,14 @@
            <section class="create-farm-form">
             <form action="createFarm" method="POST" ENCTYPE="multipart/form-data">
                 <div class="messages">
-                    <?php if(isset($messages)){
-                        foreach ($messages as $message){
-                            echo $message;
-                        }
-                    }
-                    ?>
+                    test
                 </div>
-                <input name="name" type="text" placeholder="name">
-                <input name="street" type="text" placeholder="street">
-                <input name="city" type="text" placeholder="city">
-                <input name="postal-code" type="text" placeholder="postal-code">
-                <input name="building-number" type="text" placeholder="building-number">
-
+                <input name="id" type="text" placeholder="id">
+                <input name="field-name" type="text" placeholder="field name">
+                <input name="Area" type="text" placeholder="area">
+                <textarea name="field-description" rows=5 placeholder="field description"></textarea>
                 <input type="file" name="file"/><br/>
-                <button type="submit">create farm</button>
+                <button type="submit">add field</button>
             </form>
                
            </section>

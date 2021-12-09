@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/farms.css">
-    <link rel="stylesheet" type="text/css" href="../css/overview.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/farms.css">
+    <link rel="stylesheet" type="text/css" href="public/css/overview.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <title>Fields</title>
 </head>
@@ -10,7 +10,7 @@
 <body>
     <div class="base-container">
        <nav>
-           <img src="../img/logo.svg">
+           <img src="public/img/logo.svg">
            <ul>
                <li>
                 <a href="#" class="button">
@@ -93,7 +93,7 @@
            <section class="farms-background">
             <ul class="fields-list">
                 <li class="fields-list-item">
-                    <img src="../img/field.jpg" class="field-picture">
+                    <img src="public/img/field.jpg" class="field-picture">
                     <div class="field-description-container">
                         <h2 class="field-info">
                             ID : 
@@ -123,7 +123,7 @@
                     
                 </li>
                 <li class="fields-list-item">
-                    <img src="../img/field.jpg" class="field-picture">
+                    <img src="public/img/field.jpg" class="field-picture">
                     <div class="field-description-container">
                         <h2 class="field-info">
                             ID : 
@@ -153,7 +153,7 @@
                     
                 </li>
                 <li class="fields-list-item">
-                    <img src="../img/field.jpg" class="field-picture">
+                    <img src="public/img/field.jpg" class="field-picture">
                     <div class="field-description-container">
                         <h2 class="field-info">
                             ID : 
@@ -182,7 +182,7 @@
                     </a>
                 </li>
                 <li class="fields-list-item">
-                    <img src="../img/field.jpg" class="field-picture">
+                    <img src="public/img/field.jpg" class="field-picture">
                     <div class="field-description-container">
                         <h2 class="field-info">
                             ID : 
@@ -211,7 +211,7 @@
                     </a>
                 </li>
                 <li class="fields-list-item">
-                    <img src="../img/field.jpg" class="field-picture">
+                    <img src="public/img/field.jpg" class="field-picture">
                     <div class="field-description-container">
                         <h2 class="field-info">
                             ID : 

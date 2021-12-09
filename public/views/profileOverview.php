@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/farms.css">
-    <link rel="stylesheet" type="text/css" href="../css/overview.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/farms.css">
+    <link rel="stylesheet" type="text/css" href="public/css/overview.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <title>Overview</title>
 </head>
@@ -10,7 +10,7 @@
 <body>
     <div class="base-container">
        <nav>
-           <img src="../img/logo.svg">
+           <img src="public/img/logo.svg">
            <ul>
                <li>
                 <a href="#" class="button">
@@ -69,14 +69,14 @@
            </header>
            <section class="farms-background">
                <div class="farm-picture-container">
-                   <img src="../img/farms/farm 1.jpg"  id="farmhouse">
+                   <img src="public/img/farms/farm 1.jpg"  id="farmhouse">
                    <div>
                        <h2 class="description">title </h2>
                        <p class="description"> description</p>
                    </div>
                 </div>
                 <div class="profile-picture">
-                    <img src="../img/placeholder.svg" id=picture-placeholder>
+                    <img src="public/img/placeholder.svg" id=picture-placeholder>
                     <h2 class="picture-description">
                         Marc Johnson
                     </h2>

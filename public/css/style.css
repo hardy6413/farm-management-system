@@ -262,6 +262,7 @@ section.create-farm-form{
     height: 80%;
     padding: 1em;
     overflow: auto;
+    
 }
 
 .create-farm-form > form{
@@ -272,7 +273,28 @@ section.create-farm-form{
     justify-content: center;
     align-content: center;
     align-items: center;
-    border-radius: 3em;
+    border-radius: 1.5em;
+    height: 80%;
+}
+
+.create-farm-form > form > select{
+    color: #846F00;
+    width: 25%;
+    font: normal normal normal 600 1.3em/2em Segoe UI;
+    background: #D0E8D1 0% 0% no-repeat padding-box;
+    border: green 2px solid;
+
+}
+
+.create-farm-form > form > input{
+    
+    height: 8%;
+}
+
+select > option {
+    color: #846F00;
+    width: 25%;
+    font: normal normal normal 600 1.3em/2em Segoe UI;
 }
 
 
@@ -325,4 +347,11 @@ section.create-farm-form{
     justify-content: space-between;
     border-radius: 30px;
     overflow: auto;
+}
+
+
+.messages{
+    height: 10%;
+    color: #846F00;
+    font: normal normal normal 600 2vmin Segoe UI;
 }

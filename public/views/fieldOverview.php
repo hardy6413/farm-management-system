@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/farms.css">
-    <link rel="stylesheet" type="text/css" href="../css/overview.css">
-    <link rel="stylesheet" type="text/css" href="../css/field.css">
-    <link rel="stylesheet" type="text/css" href="../css/tasks.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/farms.css">
+    <link rel="stylesheet" type="text/css" href="public/css/overview.css">
+    <link rel="stylesheet" type="text/css" href="public/css/field.css">
+    <link rel="stylesheet" type="text/css" href="public/css/tasks.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <title>Field</title>
 </head>
@@ -12,7 +12,7 @@
 <body>
     <div class="base-container">
        <nav>
-           <img src="../img/logo.svg">
+           <img src="public/img/logo.svg">
            <ul>
                <li>
                 <a href="#" class="button">
@@ -94,7 +94,7 @@
            </header>
            <section class="field-data-background">
             <div class="field-data">
-                <img src="../img/field.jpg" class="field-picture" id="field-description-picture">
+                <img src="public/img/field.jpg" class="field-picture" id="field-description-picture">
                 <div class="field-data-container">
                     <h2 class="field-data-info">
                         ID : 
