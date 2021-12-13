@@ -6,7 +6,8 @@ require_once __DIR__ .'/../models/UserAccount.php';
 class SecurityController extends AppController
 {
     public function login(){
-        $userAccount = new UserAccount('email@google.com','1234');
+
+        $userAccountRepository = new UserAccountRepository();
 
         if (!$this->isPost()){
             return $this->render('login');
@@ -14,6 +15,13 @@ class SecurityController extends AppController
 
         $email = $_POST['email_'];
         $password = $_POST['password_'];
+
+        $userAccount = $userAccountRepository->getUserAccount($email);
+
+        if (!$userAccount) {
+            return $this->render('login',['messages' => ['User not found']] );
+        }
+
 
         if ($userAccount->getEmail() !== $email){
             return $this->render('login', ['messages' => ['User with this email does not exist!']] );

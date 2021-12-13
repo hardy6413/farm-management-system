@@ -1,20 +1,20 @@
 <?php
 
 class Field extends BaseClass{
-    private float $fieldArea;
+    private float $area;
 
-    private string $fieldName;
+    private string $name;
 
-    private string $fieldInfo;
+    private string $description;
 
-    private string $fieldBlockNumber;
+    private string $blockNumber;
 
     private bool $isProperty;
 
     private float $extraPayment;
 
-    private Farm $farmData;
+    private Farm $farm;
 
-    private DateTime $addedAt;
+    private DateTime $created_at;
 
 }

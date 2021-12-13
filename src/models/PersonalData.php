@@ -9,4 +9,6 @@ class PersonalData extends BaseClass{
 
     private Address  $addres;
 
+    private Farm $farm;
+
 }

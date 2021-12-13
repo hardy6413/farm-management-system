@@ -10,6 +10,7 @@ class Address extends BaseClass {
     private string $buildingNumber;
 
 
+
     public function __construct(string $street, string $city, string $postalCode, string $buildingNumber)
     {
         $this->street = $street;

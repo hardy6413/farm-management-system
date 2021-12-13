@@ -7,7 +7,7 @@ class Farm extends BaseClass{
 
     private UserAccount $Owner;
 
-    private Address  $farmAddres;
+    private Address  $farmAddress;
 
     private int $token;
 
@@ -18,7 +18,7 @@ class Farm extends BaseClass{
     {
         $this->name = $name;
         $this->Owner = $Owner;
-        $this->farmAddres = $farmAddres;
+        $this->farmAddress = $farmAddres;
         $this->token = $token;
         $this->image = $image;
     }
@@ -59,15 +59,15 @@ class Farm extends BaseClass{
     }
 
 
-    public function getFarmAddres(): Address
+    public function getFarmAddress(): Address
     {
-        return $this->farmAddres;
+        return $this->farmAddress;
     }
 
 
-    public function setFarmAddres(Address $farmAddres): void
+    public function setFarmAddress(Address $farmAddress): void
     {
-        $this->farmAddres = $farmAddres;
+        $this->farmAddress = $farmAddress;
     }
 
 
