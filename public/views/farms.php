@@ -2,6 +2,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
+    <link rel="stylesheet" type="text/css" href="public/css/overview.css">
+    <link rel="stylesheet" type="text/css" href="public/css/tasks.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <title>Farms</title>
 </head>
@@ -50,7 +52,7 @@
                 </div>
                 <div class="create-farm">
                     <i class="fas fa-plus"></i>
-                    create farm
+                    <a href="/createFarm" > create farm </a>
                 </div>
            </header>
            <div>Farms around you</div>

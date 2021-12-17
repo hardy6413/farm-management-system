@@ -21,7 +21,8 @@ class Address extends BaseClass {
 
     public function __toString()
     {
-        return "Street: ".$this->getStreet()."<br>City: ".$this->getCity();
+        return "City: ".$this->getCity()."<br> Street: ".$this->getStreet()
+            ."<br>Postal code: ".$this->getPostalCode();
     }
 
 

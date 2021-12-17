@@ -3,24 +3,23 @@ require_once 'Address.php';
 require_once 'UserAccount.php';
 
 class Farm extends BaseClass{
+
     private string $name;
-
-    private UserAccount $Owner;
-
-    private Address  $farmAddress;
-
-    private int $token;
-
     private string $image;
+    private int $token;
+    private Address  $farmAddress;
+    private $fields = [];
+    private $workers = [];
 
 
-    public function __construct(string $name, UserAccount $Owner, Address $farmAddres, int $token, string $image)
+    public function __construct(string $name, string $image, int $token, Address $farmAddress, array $fields, array $workers)
     {
         $this->name = $name;
-        $this->Owner = $Owner;
-        $this->farmAddress = $farmAddres;
-        $this->token = $token;
         $this->image = $image;
+        $this->token = $token;
+        $this->farmAddress = $farmAddress;
+        $this->fields = $fields;
+        $this->workers = $workers;
     }
 
 
@@ -35,7 +34,6 @@ class Farm extends BaseClass{
         $this->id = $id;
     }
 
-
     public function getName(): string
     {
         return $this->name;
@@ -47,27 +45,16 @@ class Farm extends BaseClass{
         $this->name = $name;
     }
 
-    public function getOwner(): UserAccount
+
+    public function getImage(): string
     {
-        return $this->Owner;
+        return $this->image;
     }
 
 
-    public function setOwner(UserAccount $Owner): void
+    public function setImage(string $image): void
     {
-        $this->Owner = $Owner;
-    }
-
-
-    public function getFarmAddress(): Address
-    {
-        return $this->farmAddress;
-    }
-
-
-    public function setFarmAddress(Address $farmAddress): void
-    {
-        $this->farmAddress = $farmAddress;
+        $this->image = $image;
     }
 
 
@@ -83,17 +70,26 @@ class Farm extends BaseClass{
     }
 
 
-    public function getImage(): string
+    public function getFarmAddress(): Address
     {
-        return $this->image;
-    }
-
-    public function setImage(string $image): void
-    {
-        $this->image = $image;
+        return $this->farmAddress;
     }
 
 
+    public function setFarmAddress(Address $farmAddress): void
+    {
+        $this->farmAddress = $farmAddress;
+    }
+
+    public function findOwner(){
+        foreach ($this->workers as $worker){
+            if ($worker instanceof PersonalData){
+                if ($worker->isOwner()){
+                    return $worker;
+                }
+            }
+        }
+    }
 
 
 }

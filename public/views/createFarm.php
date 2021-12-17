@@ -49,10 +49,10 @@
                     </form>
 
                 </div>
-                <div class="create-farm">
-                    <i class="fas fa-plus"></i>
-                    create farm
-                </div>
+               <div class="create-farm">
+                   <i class="fas fa-plus"></i>
+                   <a href="/createFarm" > create farm </a>
+               </div>
            </header>
            <section class="create-farm-form">
             <form action="createFarm" method="POST" ENCTYPE="multipart/form-data">

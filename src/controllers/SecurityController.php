@@ -2,6 +2,7 @@
 
 require_once 'AppController.php';
 require_once __DIR__ .'/../models/UserAccount.php';
+require_once __DIR__.'/../repository/UserAccountRepository.php';
 
 class SecurityController extends AppController
 {
@@ -30,6 +31,7 @@ class SecurityController extends AppController
         if ($userAccount->getPassword() !== $password){
             return $this->render('login', ['messages' => ['Wrong password']] );
         }
+
 
         return $this->render('farms');
         //$url = "http://$_SERVER[HTTP_HOST]";

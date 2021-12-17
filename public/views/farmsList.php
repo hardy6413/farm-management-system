@@ -53,17 +53,20 @@
             </div>
             <div class="create-farm">
                 <i class="fas fa-plus"></i>
-                create farm
+                <a href="/createFarm" > create farm </a>
             </div>
        </header>
            <section class="farms-list-background">
             <ul class="fields-list">
                 <li class="farms-item-container">
+                    <?php foreach ($farms as $farm): ?>
                     <img id="farm-picture" src="public/uploads/<?= $farm->getImage() ?>" >
                     <div>
-                        <h2 class="farm-data-info"><?= $farm->getName(); ?></h2>
-                        <h2 class="farm-data-info"> <?= $farm->getFarmAddres()->__toString(); ?></h2>
+                        <h2 class="farm-data-info" id="desc"><?= $farm->findOwner()->__toString(); ?></h2>
+                        <h2 class="farm-data-info" id="desc"><?= $farm->getName(); ?></h2>
+                        <h2 class="farm-data-info" id="desc"> <?= $farm->getFarmAddress()->__toString(); ?></h2>
                     </div>
+                    <?php endforeach; ?>
                 </li>
             </ul>
            </section>

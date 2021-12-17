@@ -204,8 +204,23 @@ header {
 }
 .create-farm > i {
     padding: 1em 0.2em;
-    font-size: 1.2em;
+    font-size: 2.5vmin;
+    position: relative;
+    top: 2px;
+    left: 1px;
     
+}
+
+.create-farm > a{
+    border-radius: 1em;
+    letter-spacing: 0.7px;
+    color: #846F00;
+    font-family: 'Segoe UI';
+    padding: 0.2em;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-bar {
@@ -354,4 +369,8 @@ select > option {
     height: 10%;
     color: #846F00;
     font: normal normal normal 600 2vmin Segoe UI;
+}
+
+#desc{
+    height: auto;
 }
