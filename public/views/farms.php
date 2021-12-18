@@ -20,7 +20,7 @@
                     </a>
                </li>
                <li>
-                <a href="#" class="button">
+                <a href="/account" class="button">
                     <i class="fas fa-user-circle"></i>
                     account
                 </a>
@@ -35,7 +35,7 @@
                      notifications</a>
                </li>
                <li class="settings">
-                <a href="#" class="button"><i class="fas fa-cog"></i>
+                <a href="/settings" class="button"><i class="fas fa-cog"></i>
                      settings</a>
                </li>
            </ul>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="create-farm">
                     <i class="fas fa-plus"></i>
-                    <a href="/createFarm" > create farm </a>
+                    <a class="create-farm-button" href="/createFarm"  > create farm </a>
                 </div>
            </header>
            <div>Farms around you</div>

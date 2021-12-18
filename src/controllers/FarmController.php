@@ -5,6 +5,7 @@ require_once __DIR__ .'/../models/Address.php';
 require_once __DIR__ .'/../models/Farm.php';
 require_once __DIR__.'/../repository/UserAccountRepository.php';
 require_once __DIR__.'/../repository/FarmRepository.php';
+require_once __DIR__.'/../repository/PersonalDataRepository.php';
 
 class FarmController extends AppController
 {
@@ -16,29 +17,38 @@ class FarmController extends AppController
 
     private $userRepository;
     private $farmRepository;
+    private $personalDataRepository;
 
     public function __construct()
     {
         parent::__construct();
         $this->userRepository = new UserAccountRepository();
         $this->farmRepository = new FarmRepository();
+        $this->personalDataRepository = new PersonalDataRepository();
     }
 
 
     public function createFarm(){
         session_start();
         if ($this ->isPost() && is_uploaded_file($_FILES['file']['tmp_name'])
-            && $this->validate($_FILES['file'])){
-
+            && $this->validate($_FILES['file']))
+        {
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
-            $user = $this->userRepository->findById($_SESSION['logged_in_user_id']);
-            $user->setId($_SESSION['logged_in_user_id']);
+
+            $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_id']);
+            if ($owner->isOwner()){
+                $this->messages[] = 'You can not have two farms';
+                return $this->render('createFarm', ['messages' => $this->messages]);
+            }else{
+                $owner->setIsOwner(true);
+            }
+
+
             $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
-            $farm = new Farm($_POST['name'], $_FILES['file']['name'],1234,$address);
-            $farm->setOwner($user);
-            $this->farmRepository->createFarm($farm);
+            $farm = new Farm($_POST['name'], $_FILES['file']['name'],1234,$address,array(), array($owner));
+            $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
 
             return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
                 ,'messages' => $this->messages]);
@@ -49,7 +59,6 @@ class FarmController extends AppController
     }
 
     private function validate(array $file) : bool {
-        //var_dump($file);
         if ($file['size'] > self::MAX_FILE_SIZE){
             $this->messages[] = 'File is too large for destination file system.';
             return false;
@@ -69,6 +78,9 @@ class FarmController extends AppController
 
         $this->render('farmsList', ['farms' => $farms]);
     }
+
+
+
 
 
 }

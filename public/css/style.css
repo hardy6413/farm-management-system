@@ -221,6 +221,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2.5vmin;
 }
 
 .search-bar {
@@ -374,3 +375,5 @@ select > option {
 #desc{
     height: auto;
 }
+
+

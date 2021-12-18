@@ -13,13 +13,13 @@
            <img src="public/img/logo.svg">
            <ul>
                <li>
-                <a href="#" class="button">
+                <a href="/profileOverview" class="button">
                     <i class="fas fa-home"></i>
                     myFarm
                     </a>
                </li>
                <li>
-                <a href="#" class="button">
+                <a href="/account" class="button">
                     <i class="fas fa-user-circle"></i>
                     account
                 </a>
@@ -34,7 +34,7 @@
                      notifications</a>
                </li>
                <li class="settings">
-                <a href="#" class="button"><i class="fas fa-cog"></i>
+                <a href="/settings" class="button"><i class="fas fa-cog"></i>
                      settings</a>
                </li>
            </ul>

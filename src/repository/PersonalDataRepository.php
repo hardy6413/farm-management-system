@@ -1,16 +1,13 @@
 <?php
 require_once 'Repository.php';
 require_once __DIR__.'/../models/PersonalData.php';
-class PersonalDataRepository
+class PersonalDataRepository extends Repository
 {
-    public function findById(int $id): ?PersonalData{
+    public function findByUserAccountId(int $id): ?PersonalData{
         $stmt = $this->database->connect()->prepare('
-                SELECT pd.first_name, pd.last_name, ad.street, ad.city, ad.postal_code, ad.building_number
-                , f.name, f.token, f.image, fa.street as farm_address_street, fa.city as farm_address_city
-                , fa.postal_code as farm_address_postal_code, fa.building_number as farm_address_building_number,
-                owner.first_name, owner.last_name,
-                from personal_data pd, address ad, farm f, address fa, personal_data owner
-                WHERE pd.address_id = ad.id and pd.farm_id = f.id and f.address_id = fa.id
+                SELECT pd.id, pd.first_name, pd.last_name, pd.is_owner, ad.street, ad.city, ad.postal_code, ad.building_number
+                from personal_data pd, address ad, user_account ac
+                WHERE pd.address_id = ad.id and pd.id=ac.personal_data_id and ac.id=:id
             ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -18,10 +15,13 @@ class PersonalDataRepository
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user == false){
-            return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
+            return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
         }
 
-        //return new UserAccount($user['email'],$user['password']);
+        $_SESSION['logged_in_personal_data_id'] = $user['id'];
+        return new PersonalData($user['first_name'], $user['last_name'],
+            new Address($user['street'], $user['city'], $user['postal_code'], $user['building_number'])
+             ,$user['is_owner']);
     }
 
 }

@@ -15,13 +15,13 @@
            <img src="public/img/logo.svg">
            <ul>
                <li>
-                <a href="#" class="button">
+                <a href="/profileOverview" class="button">
                     <i class="fas fa-home"></i>
                     myFarm
                     </a>
                </li>
                <li>
-                <a href="#" class="button">
+                <a href="/account" class="button">
                     <i class="fas fa-user-circle"></i>
                     account
                 </a>
@@ -36,7 +36,7 @@
                      notifications</a>
                </li>
                <li class="settings">
-                <a href="#" class="button"><i class="fas fa-cog"></i>
+                <a href="/settings" class="button"><i class="fas fa-cog"></i>
                      settings</a>
                </li>
            </ul>
@@ -46,26 +46,22 @@
            <header class="navi-header">
             <ul class="farm-navi">
                 <li class="farm-navi-item">
-                 <a href="#" class="navi-button">
+                 <a href="/profileOverview" class="navi-button">
                      overview
                      </a>
                 </li>
                 <li class="farm-navi-item">
-                 <a href="#" class="navi-button">
+                 <a href="/fields" class="navi-button">
                      fields
                  </a>
                 </li>
                 <li class="farm-navi-item">
-                 <a href="#" class="navi-button"> 
+                 <a href="/workers" class="navi-button">
                       workers</a>
                 </li>
                 <li class="farm-navi-item">
-                 <a href="#" class="navi-button">
+                 <a href="/tasks" class="navi-button">
                       tasks</a>
-                </li>
-                <li class="farm-navi-item">
-                 <a href="#" class="navi-button">
-                      summaries</a>
                 </li>
             </ul>
            </header>

@@ -16,23 +16,25 @@ class FarmRepository extends Repository
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $project = $stmt->fetch(PDO::FETCH_ASSOC);
+        $farm = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($project == false) {
+        if ($farm == false) {
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
-
-        return new Farm($project['name'], $project['address'], $project['image']); //todo tutaj do rpzeorbienia
+        $foundFields = $this->findFieldsByFarm($farm);
+        $foundWorkers = $this->findWorkersByFarm($farm);
+        return new Farm($farm['name'], $farm['image'], $farm['token'],
+            new Address($farm['street'],$farm['city'], $farm['postal_code'], $farm['building_number']),
+            $foundFields, $foundWorkers); //todo do przetestowania
     }
 
-    public function createFarm(Farm $farm): void
+    public function createFarm(Farm $farm, int $personalDataId): void
     {
-
         $stmt = $this->database->connect()->prepare('
         WITH identity AS (INSERT INTO address (street, city, postal_code, building_number)
-        VALUES (?, ?, ?, ?) returning id)
+        VALUES (?, ?, ?, ?) returning id) 
         INSERT INTO farm (name ,token, image, address_id)
-        VALUES  (?, ?, ?, (SELECT id from identity))
+        VALUES  (?, ?, ?, (SELECT id from identity)) returning id
         ');
 
         $stmt->execute([
@@ -42,8 +44,19 @@ class FarmRepository extends Repository
             $farm->getFarmAddress()->getBuildingNumber(),
             $farm->getName(),
             $farm->getToken(),
-            $farm->getImage(),
+            $farm->getImage()
         ]);
+        $farmId = $stmt->fetchColumn(); //todo  dziala ale funkcja nie dokonczona
+
+        $updateOwner = $this->database->connect()->prepare('
+        UPDATE personal_data
+        SET farm_id =:f_id , is_owner = true
+        WHERE id =:u_id
+        ');
+        $updateOwner->bindParam(':f_id', $farmId, PDO::PARAM_INT);
+        $updateOwner->bindParam(':u_id', $personalDataId, PDO::PARAM_INT);
+        $updateOwner->execute();
+
     }
 
     public function getFarms()
@@ -76,10 +89,7 @@ class FarmRepository extends Repository
         return $result;
         }
 
-    /**
-     * @param $farm
-     * @return array
-     */
+
     public function findFieldsByFarm($farm): array
     {
         $stmt = $this->database->connect()->prepare('

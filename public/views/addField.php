@@ -13,13 +13,13 @@
            <img src="public/img/logo.svg">
            <ul>
                <li>
-                <a href="#" class="button">
+                <a href="/profileOverview" class="button">
                     <i class="fas fa-home"></i>
                     myFarm
                     </a>
                </li>
                <li>
-                <a href="#" class="button">
+                <a href="/account" class="button">
                     <i class="fas fa-user-circle"></i>
                     account
                 </a>
@@ -34,7 +34,7 @@
                      notifications</a>
                </li>
                <li class="settings">
-                <a href="#" class="button"><i class="fas fa-cog"></i>
+                <a href="/settings" class="button"><i class="fas fa-cog"></i>
                      settings</a>
                </li>
            </ul>
@@ -45,13 +45,13 @@
                 <div class ="search-bar">
                     <i class="fas fa-search"></i>
                     <form>
-                        <input placeholder="search farm " >
+                        <input placeholder="search fields " >
                     </form>
 
                 </div>
                 <div class="create-farm">
                     <i class="fas fa-plus"></i>
-                    create farm
+                    add field
                 </div>
            </header>
            <section class="create-farm-form">

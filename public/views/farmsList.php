@@ -15,13 +15,13 @@
            <img src="public/img/logo.svg">
            <ul>
                <li>
-                <a href="#" class="button">
+                <a href="/profileOverview" class="button">
                     <i class="fas fa-home"></i>
                     myFarm
                     </a>
                </li>
                <li>
-                <a href="#" class="button">
+                <a href="/account" class="button">
                     <i class="fas fa-user-circle"></i>
                     account
                 </a>
@@ -36,7 +36,7 @@
                      notifications</a>
                </li>
                <li class="settings">
-                <a href="#" class="button"><i class="fas fa-cog"></i>
+                <a href="/settings" class="button"><i class="fas fa-cog"></i>
                      settings</a>
                </li>
            </ul>
@@ -53,21 +53,21 @@
             </div>
             <div class="create-farm">
                 <i class="fas fa-plus"></i>
-                <a href="/createFarm" > create farm </a>
+                <a class="create-farm-button" href="/createFarm" > create farm </a>
             </div>
        </header>
            <section class="farms-list-background">
             <ul class="fields-list">
-                <li class="farms-item-container">
                     <?php foreach ($farms as $farm): ?>
+                <li class="farms-item-container">
                     <img id="farm-picture" src="public/uploads/<?= $farm->getImage() ?>" >
                     <div>
                         <h2 class="farm-data-info" id="desc"><?= $farm->findOwner()->__toString(); ?></h2>
                         <h2 class="farm-data-info" id="desc"><?= $farm->getName(); ?></h2>
                         <h2 class="farm-data-info" id="desc"> <?= $farm->getFarmAddress()->__toString(); ?></h2>
                     </div>
-                    <?php endforeach; ?>
                 </li>
+                    <?php endforeach; ?>
             </ul>
            </section>
        </main>
