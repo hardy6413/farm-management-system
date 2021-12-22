@@ -37,7 +37,7 @@ function createFarm(farm) {
     console.log("weeee")
     debugger;
     console.log("wewsee")
-    const image = clone.querySelector("img");
+    const image = clone.querySelector("img"); //TODO
     image.src = `/public/uploads/${farm.image}`;
 
     const owner = clone.querySelector("h2");
