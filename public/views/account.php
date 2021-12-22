@@ -25,13 +25,13 @@
                 </a>
                </li>
                <li>
-                <a href="#" class="button"> 
-                    <i class="far fa-comment"></i>
-                     messages</a>
-               </li>
-               <li>
                 <a href="#" class="button"><i class="fas fa-bell"></i>
                      notifications</a>
+               </li>
+               <li>
+                   <form class="logout-form" action="logout" method="POST">
+                       <button type="submit"  class="logout-button">log out</button>
+                   </form>
                </li>
                <li class="settings">
                 <a href="/settings" class="button"><i class="fas fa-cog"></i>

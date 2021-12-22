@@ -328,6 +328,16 @@ select > option {
     flex-direction: row;
     width: 95%;
     height: 40%;
+    margin: 0;
+    padding-bottom: 0.3em;
+    padding-top: 0.3em;
+}
+
+.farms-list{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
 }
 
 .farms-item-container>div{
@@ -376,4 +386,35 @@ select > option {
     height: auto;
 }
 
+
+.logout-button{
+    background: #D4CB9D 0% 0% no-repeat padding-box;
+    opacity: 1;
+    width: 100%;
+    border: none;
+    text-align: center;
+    color: #846F00;
+    margin: 0;
+    padding: 0;
+    font-size: 2vh;
+    line-height: 2em;
+    font: normal normal normal 600 20px/27px Segoe UI;;
+}
+
+.logout-form{
+    letter-spacing: 0.7px;
+    color: #846F00;
+    font-family: 'Segoe UI';
+    padding: 0.2em;
+    margin-left: 1em;
+    width: calc(100% - 100px);
+    text-decoration: none;
+    display: inline-block;
+    line-height: 2em;
+    justify-content: left;
+    text-align: left;
+    font-size: 2vh;
+    background: #D4CB9D 0% 0% no-repeat padding-box;
+    border-radius: 1em;
+}
 

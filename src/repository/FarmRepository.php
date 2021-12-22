@@ -46,7 +46,7 @@ class FarmRepository extends Repository
             $farm->getToken(),
             $farm->getImage()
         ]);
-        $farmId = $stmt->fetchColumn(); //todo  dziala ale funkcja nie dokonczona
+        $farmId = $stmt->fetchColumn();
 
         $updateOwner = $this->database->connect()->prepare('
         UPDATE personal_data
@@ -87,10 +87,29 @@ class FarmRepository extends Repository
 
         }
         return $result;
-        }
+    }
 
 
-    public function findFieldsByFarm($farm): array
+    public function getFarmByName(string $searchString){
+        $searchString = '%'.strtolower($searchString).'%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT f.id, f.name, f.token, f.image, f.address_id, ad.street, ad.city, ad.postal_code, ad.building_number,
+            adp.street, adp.city, adp.postal_code, adp.building_number,
+            pd.first_name, pd.last_name, pd.is_owner
+            FROM farm f, address ad , personal_data pd , address adp 
+            WHERE LOWER(f.name) LIKE :search and f.address_id = ad.id and pd.farm_id = f.id and adp.id = pd.address_id
+        ');
+        $stmt->bindParam(':search', $searchString,PDO::PARAM_STR);
+        $stmt->execute();
+
+        $farm = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $farm;
+    }
+
+
+    private function findFieldsByFarm($farm): array
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT * FROM field f, farm fa
@@ -128,5 +147,6 @@ class FarmRepository extends Repository
         return $foundWorkers;
 
     }
+
 
 }

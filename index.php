@@ -19,6 +19,8 @@ Router::get('account', 'ProfileController');
 Router::get('settings', 'ProfileController');
 Router::get('profileOverview', 'ProfileController');
 Router::get('farmsList', 'FarmController');
+Router::post('search', 'FarmController');
+Router::post('logout','SecurityController');
 
 Router::run($path);
 

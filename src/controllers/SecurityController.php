@@ -6,8 +6,9 @@ require_once __DIR__.'/../repository/UserAccountRepository.php';
 
 class SecurityController extends AppController
 {
+    private $cookieName;
     public function login(){
-
+        session_start();
         $userAccountRepository = new UserAccountRepository();
 
         if (!$this->isPost()){
@@ -32,10 +33,26 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password']] );
         }
 
+        $cookieValue = $userAccount->getEmail();//todo to do sprawdzenia
+        if(!isset($_COOKIE[$this->cookieName])){
+            setcookie('user',$cookieValue,time() + (86400 * 30),"/");
+        }
+        if(isset($_SESSION['logged_in_user_farm_id'])){
+            return $this->render('profileOverview');
+        }
 
         return $this->render('farms');
         //$url = "http://$_SERVER[HTTP_HOST]";
         //header("Location: {$url}/farms");
 
+    }
+
+    public function logout(){
+        session_start();
+        session_destroy();
+        if (isset($_COOKIE[$this->cookieName])) {
+            setcookie($this->cookieName, '', time() - (86400 * 30), "/");
+            return $this->render('login');
+        }
     }
 }

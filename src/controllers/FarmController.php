@@ -55,8 +55,31 @@ class FarmController extends AppController
         }
 
 
-        $this->render('createFarm', ['messages' => $this->messages]);
+        return $this->render('createFarm', ['messages' => $this->messages]);
     }
+
+    public function search(){
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json"){
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            $test = json_encode($this->farmRepository->getFarmByName($decoded['search']));
+            echo json_encode($this->farmRepository->getFarmByName($decoded['search']));
+        }
+    }
+
+
+    public function farmsList(){
+        $farms = $this->farmRepository->getFarms();
+
+        $this->render('farmsList', ['farms' => $farms]);
+    }
+
 
     private function validate(array $file) : bool {
         if ($file['size'] > self::MAX_FILE_SIZE){
@@ -70,13 +93,6 @@ class FarmController extends AppController
         }
 
         return true;
-    }
-
-
-    public function farmsList(){
-        $farms = $this->farmRepository->getFarms();
-
-        $this->render('farmsList', ['farms' => $farms]);
     }
 
 

@@ -13,29 +13,29 @@
            <img src="public/img/logo.svg">
            <ul>
                <li>
-                <a href="/profileOverview" class="button">
-                    <i class="fas fa-home"></i>
-                    myFarm
-                    </a>
+                   <a href="/profileOverview" class="button">
+                       <i class="fas fa-home"></i>
+                       myFarm
+                   </a>
                </li>
                <li>
-                <a href="/account" class="button">
-                    <i class="fas fa-user-circle"></i>
-                    account
-                </a>
+                   <a href="/account" class="button">
+                       <i class="fas fa-user-circle"></i>
+                       account
+                   </a>
                </li>
                <li>
-                <a href="#" class="button"> 
-                    <i class="far fa-comment"></i>
-                     messages</a>
+                   <a href="#" class="button"><i class="fas fa-bell"></i>
+                       notifications</a>
                </li>
                <li>
-                <a href="#" class="button"><i class="fas fa-bell"></i>
-                     notifications</a>
+                   <form class="logout-form" action="logout" method="POST">
+                       <button type="submit"  class="logout-button">log out</button>
+                   </form>
                </li>
                <li class="settings">
-                <a href="/settings" class="button"><i class="fas fa-cog"></i>
-                     settings</a>
+                   <a href="/settings" class="button"><i class="fas fa-cog"></i>
+                       settings</a>
                </li>
            </ul>
         
@@ -65,58 +65,18 @@
            </header>
            <section class="farms-background">
             <ul class="workers-list">
+                <?php foreach ($workers as $worker): ?>
                 <li class="workers-list-item">
                     <img src="public/img/placeholder.svg" class="worker-picture">
                     <h2 class="picture-description">
-                        Marc Johnson
+                        <?= $worker->getFirstName()." ".$worker->getLastName(); ?>
                     </h2>
                  <a href="#" class="worker-activity">
-                     online
-                     </a>
-                     <i class="fas fa-ellipsis-h" id="options"></i>
-                </li>
-                <li class="workers-list-item">
-                    <img src="public/img/placeholder.svg" class="worker-picture">
-                    <h2 class="picture-description">
-                        Marc Johnson
-                    </h2>
-                    <a href="#" class="worker-activity">
                      offline
                      </a>
                      <i class="fas fa-ellipsis-h" id="options"></i>
                 </li>
-                <li class="workers-list-item">
-                    <img src="public/img/placeholder.svg" class="worker-picture">
-                    <h2 class="picture-description">
-                        Marc Johnson
-                    </h2>
-                    
-                 <a href="#" class="worker-activity">
-                     Ploughing
-                     </a>
-                     <i class="fas fa-ellipsis-h" id="options"></i>
-                </li>
-                <li class="workers-list-item">
-                    <img src="public/img/placeholder.svg" class="worker-picture">
-                    <h2 class="picture-description">
-                        Marc Johnson
-                    </h2>
-                 <a href="#" class="worker-activity">
-                     Ploughing
-                     </a>
-                     <i class="fas fa-ellipsis-h" id="options"></i>
-                </li>
-                <li class="workers-list-item">
-                    <img src="public/img/placeholder.svg" class="worker-picture">
-                    <h2 class="picture-description">
-                        Marc Johnson
-                    </h2>
-                 <a href="#" class="worker-activity">
-                     Ploughing
-                     </a>
-                     <i class="fas fa-ellipsis-h" id="options"></i>
-                </li>
-                
+                <?php endforeach; ?>
             </ul>
            </section>
        </main>

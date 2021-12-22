@@ -24,4 +24,27 @@ class PersonalDataRepository extends Repository
              ,$user['is_owner']);
     }
 
+    public function findWorkersByFarm(int $farmId){
+        $stmt = $this->database->connect()->prepare('
+                SELECT * FROM personal_data pd, farm fa, address a
+                WHERE pd.farm_id = fa.id and fa.id =:id and a.id = pd.address_id
+            ');
+        $stmt->bindParam(':id', $farmId, PDO::PARAM_INT);
+        $stmt->execute();
+        $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($workers == false){
+            return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
+        }
+
+        $foundWorkers=[];
+        foreach ($workers as $worker) {
+            $foundWorkers[] = new PersonalData($worker['first_name'],$worker['last_name'],
+                new Address($worker['street'], $worker['city'], $worker['postal_code'], $worker['building_number'])
+                ,$worker['is_owner']);
+        }
+
+        return $foundWorkers;
+    }
+
 }
