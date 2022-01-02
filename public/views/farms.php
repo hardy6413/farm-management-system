@@ -56,9 +56,9 @@
            <header>
                 <div class ="search-bar">
                     <i class="fas fa-search"></i>
-                    <form>
-                        <input placeholder="search farm " >
-                    </form>
+                    <div>
+                        <input placeholder="search farm" >
+                    </div>
 
                 </div>
                 <div class="create-farm">

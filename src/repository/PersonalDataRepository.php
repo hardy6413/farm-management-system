@@ -24,27 +24,72 @@ class PersonalDataRepository extends Repository
              ,$user['is_owner']);
     }
 
-    public function findWorkersByFarm(int $farmId){
-        $stmt = $this->database->connect()->prepare('
-                SELECT * FROM personal_data pd, farm fa, address a
+    public function findWorkersByFarm(){
+        if (!isset($_SESSION['logged_in_user_farm_id'])){
+            return null;
+        }else{
+            $stmt = $this->database->connect()->prepare('
+                SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number
+                FROM personal_data pd, farm fa, address a
                 WHERE pd.farm_id = fa.id and fa.id =:id and a.id = pd.address_id
             ');
-        $stmt->bindParam(':id', $farmId, PDO::PARAM_INT);
-        $stmt->execute();
-        $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt->bindParam(':id', $_SESSION['logged_in_user_farm_id'], PDO::PARAM_INT);
+            $stmt->execute();
+            $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($workers == false){
-            return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
+            if ($workers == false){
+                return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
+            }
+
+            $foundWorkers=[];
+            foreach ($workers as $worker) {
+                $foundWorkers[] = new PersonalData($worker['first_name'],$worker['last_name'],
+                    new Address($worker['street'], $worker['city'], $worker['postal_code'], $worker['building_number'])
+                    ,$worker['is_owner']);
+            }
+            return $foundWorkers;
         }
+    }
 
-        $foundWorkers=[];
-        foreach ($workers as $worker) {
-            $foundWorkers[] = new PersonalData($worker['first_name'],$worker['last_name'],
-                new Address($worker['street'], $worker['city'], $worker['postal_code'], $worker['building_number'])
-                ,$worker['is_owner']);
-        }
+    public function createAccount(Address $address, PersonalData $personalData, UserAccount $newUserAccount)
+    {
+        $stmt = $this->database->connect()->prepare('
+        WITH identity AS (INSERT INTO address (street, city, postal_code, building_number)
+        VALUES (?, ?, ?, ?) returning id) 
+        INSERT INTO personal_data (first_name, last_name, address_id)
+        VALUES  (?, ?,(SELECT id from identity)) returning id
+        ');
+        $stmt->execute([
+            $address->getStreet(),
+            $address->getCity(),
+            $address->getPostalCode(),
+            $address->getBuildingNumber(),
+            $personalData->getFirstName(),
+            $personalData->getLastName(),
+        ]);
+        $personalDataId = $stmt->fetchColumn();
 
-        return $foundWorkers;
+        $userAccountInsert = $this->database->connect()->prepare('
+        INSERT INTO user_account (email, password, personal_data_id)
+        VALUES (?,?,?)
+        ');
+        $userAccountInsert->execute([
+            $newUserAccount->getEmail(),
+            $newUserAccount->getPassword(),
+            $personalDataId
+        ]);
+    }
+
+    public function joinFarm($farmId,$personalDataId)
+    {
+        $updateOwner = $this->database->connect()->prepare('
+        UPDATE personal_data
+        SET farm_id =:f_id , is_owner = false 
+        WHERE id =:u_id
+        ');
+        $updateOwner->bindParam(':f_id', $farmId, PDO::PARAM_INT);
+        $updateOwner->bindParam(':u_id', $personalDataId, PDO::PARAM_INT);
+        $updateOwner->execute();
     }
 
 }

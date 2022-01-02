@@ -101,44 +101,18 @@
                         completed
                     </div>
                    </li>
+                <?php if (isset($tasks))foreach ($tasks as $task): ?>
                 <li class="task-list-item">
                     <label class="form-control">
                         <input type="checkbox" name="checkbox" id="task-checkbox" />
                         <span class="checkmark"></span>
                     </label>
                     
-                 <a href="#" class="task-button"> 
-                      add fieldeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedeweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeetesteeeeeeeeeeeeeee
+                 <a href="#" class="task-button">
+                     <?= $task->getDescription(); ?>
                     </a>
                 </li>
-                <li class="task-list-item">
-                    <label class="form-control">
-                        <input type="checkbox" name="checkbox" id="task-checkbox" />
-                        <span class="checkmark"></span>
-                    </label>
-                 <a href="#" class="task-button"> 
-                      add field
-                    </a>
-                   </li>
-
-                   <li class="task-list-item">
-                    <label class="form-control">
-                        <input type="checkbox" name="checkbox" id="task-checkbox" />
-                        <span class="checkmark"></span>
-                    </label>
-                 <a href="#" class="task-button"> 
-                      add field</a>
-                   </li>
-
-                   <li class="task-list-item">
-                    <label class="form-control">
-                        <input type="checkbox" name="checkbox" id="task-checkbox" />
-                        <span class="checkmark"></span>
-                    </label>
-                    
-                 <a href="#" class="task-button"> 
-                      add field</a>
-                   </li>
+                <?php endforeach; ?>
             </ul>
     
            </section>

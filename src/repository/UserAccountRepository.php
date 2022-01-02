@@ -5,7 +5,7 @@ require_once __DIR__.'/../models/UserAccount.php';
 
 class UserAccountRepository extends Repository
 {
-    public function getUserAccount(string $email): ?UserAccount{
+    public function logIn(string $email): ?UserAccount{
         $stmt = $this->database->connect()->prepare('
                 SELECT ua.id, ua.email, ua.password, ua.personal_data_id, pd.farm_id
                 FROM user_account ua, personal_data pd
@@ -20,7 +20,7 @@ class UserAccountRepository extends Repository
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
 
-        $_SESSION['logged_in_user_id'] = $user['id'];
+        $_SESSION['logged_in_user_id'] = $user['id'];//todo czy takie zapisywanie do sesji moze byc?
         if (($user['farm_id']) != null){
             $_SESSION['logged_in_user_farm_id'] = $user['farm_id'];
         }
@@ -41,6 +41,23 @@ class UserAccountRepository extends Repository
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
 
+        return new UserAccount($user['email'],$user['password']);
+    }
+
+    public function getUserAccount(string $email): ?UserAccount{
+        $stmt = $this->database->connect()->prepare('
+                SELECT ua.id, ua.email, ua.password, ua.personal_data_id, pd.farm_id
+                FROM user_account ua, personal_data pd
+                WHERE ua.email =:email and ua.personal_data_id = pd.id
+            ');
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user == false){
+            return null;
+        }
         return new UserAccount($user['email'],$user['password']);
     }
 

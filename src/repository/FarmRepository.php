@@ -35,7 +35,7 @@ class FarmRepository extends Repository
         VALUES (?, ?, ?, ?) returning id) 
         INSERT INTO farm (name ,token, image, address_id)
         VALUES  (?, ?, ?, (SELECT id from identity)) returning id
-        ');
+        ');//todo returning id? chyba zapomnialem usunac
 
         $stmt->execute([
             $farm->getFarmAddress()->getStreet(),
@@ -95,10 +95,10 @@ class FarmRepository extends Repository
 
         $stmt = $this->database->connect()->prepare('
             SELECT f.id, f.name, f.token, f.image, f.address_id, ad.street, ad.city, ad.postal_code, ad.building_number,
-            adp.street, adp.city, adp.postal_code, adp.building_number,
             pd.first_name, pd.last_name, pd.is_owner
             FROM farm f, address ad , personal_data pd , address adp 
-            WHERE LOWER(f.name) LIKE :search and f.address_id = ad.id and pd.farm_id = f.id and adp.id = pd.address_id
+            WHERE LOWER(f.name) LIKE :search and f.address_id = ad.id and pd.farm_id = f.id and adp.id = pd.address_id 
+            and pd.is_owner = true
         ');
         $stmt->bindParam(':search', $searchString,PDO::PARAM_STR);
         $stmt->execute();
@@ -112,7 +112,8 @@ class FarmRepository extends Repository
     private function findFieldsByFarm($farm): array
     {
         $stmt = $this->database->connect()->prepare('
-                SELECT * FROM field f, farm fa
+                SELECT f.name, f.description, f.area, f.extra_payment, f.block_number, f.is_property, f.image
+                FROM field f, farm fa
                 WHERE f.farm_id = fa.id and fa.id=:id
             ');
         $stmt->bindParam(':id', $farm['id'], PDO::PARAM_INT);
@@ -122,20 +123,25 @@ class FarmRepository extends Repository
         $foundFields = [];
         foreach ($fields as $field) {
             $foundFields[] = new Field($field['name'], $field['description'], $field['area'], $field['extra_payment'],
-                $field['block_number'], $field['is_property']);
+                $field['block_number'], $field['is_property'], $field['image']);
         }
         return $foundFields;
     }
 
-    private function findWorkersByFarm($farm): array
+    private function findWorkersByFarm($farm)
     {
         $stmt = $this->database->connect()->prepare('
-                SELECT * FROM personal_data pd, farm fa, address a
+                SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number
+                FROM personal_data pd, farm fa, address a
                 WHERE pd.farm_id = fa.id and fa.id =:id and a.id = pd.address_id
             ');
         $stmt->bindParam(':id', $farm['id'], PDO::PARAM_INT);
         $stmt->execute();
         $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($workers == false){
+            return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
+        }
 
         $foundWorkers=[];
         foreach ($workers as $worker) {
@@ -143,10 +149,23 @@ class FarmRepository extends Repository
                 new Address($worker['street'], $worker['city'], $worker['postal_code'], $worker['building_number'])
                 ,$worker['is_owner']);
         }
-
         return $foundWorkers;
 
     }
 
+    public function getFarmByCode($code)
+    {
+        $stmt = $this->database->connect()->prepare('
+                SELECT * FROM public.farm WHERE token =:id
+            ');
+        $stmt->bindParam(':id', $code, PDO::PARAM_INT);
+        $stmt->execute();
 
+        $farm = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($farm == false) {
+            return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
+        }
+        return $farm['id'];
+    }
 }

@@ -99,23 +99,12 @@
            </header>
            <section class="farms-background">
             <ul class="fields-list">
+                <?php if (isset($fields))foreach ($fields as $field): ?>
                 <li class="fields-list-item">
-                    <img src="public/img/field.jpg" class="field-picture">
+                    <img src="public/uploads/<?= $field->getImage(); ?>" class="field-picture">
                     <div class="field-description-container">
                         <h2 class="field-info">
-                            ID : 
-                        </h2>
-                        <h2 class="field-info">
-                            Field name :
-                        </h2>
-                        <h2 class="field-info">
-                            Last action :
-                        </h2>
-                        <h2 class="field-info">
-                            Date :
-                        </h2>
-                        <h2 class="field-info">
-                            Area :
+                            <?= $field->__toString(); ?>
                         </h2>
                      <a href="#" class="field-options">
                           Inspect on map
@@ -129,125 +118,7 @@
                     </a>
                     
                 </li>
-                <li class="fields-list-item">
-                    <img src="public/img/field.jpg" class="field-picture">
-                    <div class="field-description-container">
-                        <h2 class="field-info">
-                            ID : 
-                        </h2>
-                        <h2 class="field-info">
-                            Field name :
-                        </h2>
-                        <h2 class="field-info">
-                            Last action :
-                        </h2>
-                        <h2 class="field-info">
-                            Date :
-                        </h2>
-                        <h2 class="field-info">
-                            Area :
-                        </h2>
-                     <a href="#" class="field-options">
-                          Inspect on map
-                         </a>
-                         <a href="#" class="field-options">
-                            Past actions and notes
-                           </a> 
-                    </div>
-                    <a href="#" class="delete-icon">
-                        <i class="fas fa-trash"  id="delete-field"></i>
-                    </a>
-                    
-                </li>
-                <li class="fields-list-item">
-                    <img src="public/img/field.jpg" class="field-picture">
-                    <div class="field-description-container">
-                        <h2 class="field-info">
-                            ID : 
-                        </h2>
-                        <h2 class="field-info">
-                            Field name :
-                        </h2>
-                        <h2 class="field-info">
-                            Last action :
-                        </h2>
-                        <h2 class="field-info">
-                            Date :
-                        </h2>
-                        <h2 class="field-info">
-                            Area :
-                        </h2>
-                     <a href="#" class="field-options">
-                          Inspect on map
-                         </a>
-                         <a href="#" class="field-options">
-                            Past actions and notes
-                           </a> 
-                    </div>
-                    <a href="#" class="delete-icon">
-                        <i class="fas fa-trash"  id="delete-field"></i>
-                    </a>
-                </li>
-                <li class="fields-list-item">
-                    <img src="public/img/field.jpg" class="field-picture">
-                    <div class="field-description-container">
-                        <h2 class="field-info">
-                            ID : 
-                        </h2>
-                        <h2 class="field-info">
-                            Field name :
-                        </h2>
-                        <h2 class="field-info">
-                            Last action :
-                        </h2>
-                        <h2 class="field-info">
-                            Date :
-                        </h2>
-                        <h2 class="field-info">
-                            Area :
-                        </h2>
-                     <a href="#" class="field-options">
-                          Inspect on map
-                         </a>
-                         <a href="#" class="field-options">
-                            Past actions and notes
-                           </a> 
-                    </div>
-                    <a href="#" class="delete-icon">
-                        <i class="fas fa-trash"  id="delete-field"></i>
-                    </a>
-                </li>
-                <li class="fields-list-item">
-                    <img src="public/img/field.jpg" class="field-picture">
-                    <div class="field-description-container">
-                        <h2 class="field-info">
-                            ID : 
-                        </h2>
-                        <h2 class="field-info">
-                            Field name :
-                        </h2>
-                        <h2 class="field-info">
-                            Last action :
-                        </h2>
-                        <h2 class="field-info">
-                            Date :
-                        </h2>
-                        <h2 class="field-info">
-                            Area :
-                        </h2>
-                     <a href="#" class="field-options">
-                          Inspect on map
-                         </a>
-                         <a href="#" class="field-options">
-                            Past actions and notes
-                           </a> 
-                    </div>
-                    <a href="#" class="delete-icon">
-                        <i class="fas fa-trash"  id="delete-field"></i>
-                    </a>
-                    
-                </li>
-                
+                <?php endforeach; ?>
             </ul>
            </section>
        </main>

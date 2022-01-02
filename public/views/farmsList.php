@@ -58,9 +58,9 @@
         <header>
             <div class ="search-bar">
                 <i class="fas fa-search"></i>
-                <form>
+                <div>
                     <input placeholder="search farm" >
-                </form>
+                </div>
 
             </div>
             <div class="create-farm">
@@ -69,14 +69,26 @@
             </div>
        </header>
            <section class="farms-list-background">
+               <div class="messages" id="farms-list-message">
+                   <?php if(isset($messages)){
+                       foreach ($messages as $message){
+                           echo $message;
+                       }
+                   }
+                   ?>
+               </div>
             <ul class="farms-list">
-                    <?php foreach ($farms as $farm): ?>
+                    <?php if (isset($farms))foreach ($farms as $farm): ?>
                 <li class="farms-item-container">
                     <img id="farm-picture" src="public/uploads/<?= $farm->getImage(); ?>" >
                     <div>
                         <h2 class="farm-data-info" id="desc"><?= $farm->findOwner()->__toString(); ?></h2>
                         <p class="farm-data-info" id="desc"><?= $farm->getName(); ?></p>
                         <div class="farm-data-info" id="desc"><?= $farm->getFarmAddress()->__toString(); ?></div>
+                        <form id="joinFarmForm" action="joinFarm" method="POST">
+                            <input name="code" type="text" placeholder="enter code"> //todo zapytac o kod
+                        </form>
+                        <button id="join-button" form="joinFarmForm" type="submit">join farm</button>
                     </div>
                 </li>
                     <?php endforeach; ?>

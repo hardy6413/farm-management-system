@@ -21,6 +21,9 @@ Router::get('profileOverview', 'ProfileController');
 Router::get('farmsList', 'FarmController');
 Router::post('search', 'FarmController');
 Router::post('logout','SecurityController');
+Router::get('createAccount','WorkersController');
+Router::post('signUp','WorkersController');
+Router::post('joinFarm', 'FarmController');
 
 Router::run($path);
 

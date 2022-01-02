@@ -1,17 +1,17 @@
 <?php
 
 class Address extends BaseClass {
-    private string $street;
+    private $street;
 
-    private string $city;
+    private $city;
 
-    private string $postalCode;
+    private $postalCode;
 
-    private string $buildingNumber;
+    private $buildingNumber;
 
 
 
-    public function __construct(string $street, string $city, string $postalCode, string $buildingNumber)
+    public function __construct($street, $city, $postalCode, $buildingNumber)
     {
         $this->street = $street;
         $this->city = $city;
@@ -22,7 +22,7 @@ class Address extends BaseClass {
     public function __toString()
     {
         return "City: ".$this->getCity()."<br> Street: ".$this->getStreet()
-            ."<br>Postal code: ".$this->getPostalCode();
+            ."<br>Postal code: ".$this->getPostalCode()."<br>Building number: ".$this->getBuildingNumber();
     }
 
 

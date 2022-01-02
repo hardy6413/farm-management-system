@@ -6,8 +6,17 @@ class Task extends BaseClass
 {
     private string $description;
     private bool $isCompleted;
-    private PersonalData $personalData;
     private DateTime $created_at;
+    private PersonalData $personalData;
+
+
+    public function __construct(string $description, bool $isCompleted, DateTime $created_at, PersonalData $personalData)
+    {
+        $this->description = $description;
+        $this->isCompleted = $isCompleted;
+        $this->created_at = $created_at;
+        $this->personalData = $personalData;
+    }
 
 
     public function getId(): int

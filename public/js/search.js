@@ -34,10 +34,7 @@ function createFarm(farm) {
     const template = document.querySelector("#farm-template");
 
     const clone = template.content.cloneNode(true);
-    console.log("weeee")
-    debugger;
-    console.log("wewsee")
-    const image = clone.querySelector("img"); //TODO
+    const image = clone.querySelector("img");
     image.src = `/public/uploads/${farm.image}`;
 
     const owner = clone.querySelector("h2");
@@ -47,7 +44,8 @@ function createFarm(farm) {
     name.innerHTML = farm.name;
 
     const address  = clone.querySelector("h3");
-    address.innerHTML  = "test";
+    address.innerText  = 'City: '+farm.city + '\n Street: ' + farm.street + '\n Postal code: '
+        +farm.postal_code +'\n Building Number: '+ farm.building_number
 
     farmContainer.appendChild(clone);
 }
