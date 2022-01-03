@@ -36,7 +36,8 @@ class FarmController extends AppController
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
 
-            $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_id']);
+            $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+            $_SESSION['logged_in_personal_data_id'] = $owner->getId();//todo to zamienilem
             if ($owner->isOwner()){
                 $this->messages[] = 'You can not have two farms';
                 return $this->render('createFarm', ['messages' => $this->messages]);

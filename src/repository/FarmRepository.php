@@ -11,8 +11,10 @@ class FarmRepository extends Repository
     public function getFarm(int $id): ?Farm
     {
         $stmt = $this->database->connect()->prepare('
-                SELECT * FROM public.farm WHERE id =:id //todo czy z selecta usera  jakos wziąć?
-            ');
+            select  f.id,f.name, f.image, f.token, a.street, a.city, a.postal_code, a.building_number
+            from farm f, address a
+            where f.address_id = a.id and f.id =:id
+            ');//todo czy z selecta usera  jakos wziąć?
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -22,10 +24,13 @@ class FarmRepository extends Repository
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
         $foundFields = $this->findFieldsByFarm($farm);
-        $foundWorkers = $this->findWorkersByFarm($farm);
-        return new Farm($farm['name'], $farm['image'], $farm['token'],
-            new Address($farm['street'],$farm['city'], $farm['postal_code'], $farm['building_number']),
-            $foundFields, $foundWorkers); //todo do przetestowania
+        $foundWorkers = $this->findWorkersByFarmId($farm);
+
+        $foundFarm = new Farm($farm['name'], $farm['image'], $farm['token'],
+        new Address($farm['street'],$farm['city'], $farm['postal_code'], $farm['building_number']),
+        $foundFields, $foundWorkers);
+        $foundFarm->setId($farm['id']);
+        return $foundFarm;
     }
 
     public function createFarm(Farm $farm, int $personalDataId): void
@@ -73,7 +78,7 @@ class FarmRepository extends Repository
 
         foreach ($farms as $farm) {
             $foundFields = $this->findFieldsByFarm($farm);
-            $foundWorkers = $this->findWorkersByFarm($farm);
+            $foundWorkers = $this->findWorkersByFarmId($farm);
 
             $queriedFarm = new Farm(
                 $farm['name'],
@@ -128,7 +133,7 @@ class FarmRepository extends Repository
         return $foundFields;
     }
 
-    private function findWorkersByFarm($farm)
+    private function findWorkersByFarmId($farm)
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number

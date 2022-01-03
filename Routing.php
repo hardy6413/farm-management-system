@@ -6,7 +6,6 @@ require_once 'src/controllers/FarmController.php';
 require_once 'src/controllers/FieldController.php';
 require_once 'src/controllers/TaskController.php';
 require_once 'src/controllers/WorkersController.php';
-require_once 'src/controllers/ProfileController.php';
 
 class Router {
 

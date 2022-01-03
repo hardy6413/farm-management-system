@@ -9,6 +9,7 @@ class SecurityController extends AppController
 {
     private $cookieName;
     private $userAccountRepository;
+    private $personalDataRepository;
     private $farmRepository;
 
 
@@ -18,6 +19,7 @@ class SecurityController extends AppController
         $this->cookieName = "user";
         $this->userAccountRepository = new UserAccountRepository();
         $this->farmRepository = new FarmRepository();
+        $this->personalDataRepository = new PersonalDataRepository();
         session_start();
     }
 
@@ -49,7 +51,10 @@ class SecurityController extends AppController
             setcookie('user',$cookieValue,time() + (86400 * 30),"/");
         }
         if(isset($_SESSION['logged_in_user_farm_id'])){
-            return $this->render('profileOverview');
+            $farm = $this->farmRepository->getFarm($_SESSION['logged_in_user_farm_id']);
+            $worker = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+
+            return $this->render('profileOverview', ['farm' => $farm , 'worker' => $worker]);
         }
 
         $farms = $this->farmRepository->getFarms();
@@ -57,9 +62,11 @@ class SecurityController extends AppController
     }
 
     public function logout(){
-        session_destroy(); //todo logowanie i wylogowywanie  czy sesja jest aktywna
+        //todo logowanie i wylogowywanie  czy sesja jest aktywna
         if (isset($_COOKIE[$this->cookieName])) {
             setcookie($this->cookieName, '', time() - (86400 * 30), "/");
+            session_unset();
+            session_destroy();
             return $this->render('login');
         }//todo else
     }

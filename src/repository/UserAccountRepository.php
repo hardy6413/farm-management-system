@@ -20,7 +20,7 @@ class UserAccountRepository extends Repository
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
 
-        $_SESSION['logged_in_user_id'] = $user['id'];//todo czy takie zapisywanie do sesji moze byc?
+        $_SESSION['logged_in_user_account_id'] = $user['id'];//todo czy takie zapisywanie do sesji moze byc?
         if (($user['farm_id']) != null){
             $_SESSION['logged_in_user_farm_id'] = $user['farm_id'];
         }

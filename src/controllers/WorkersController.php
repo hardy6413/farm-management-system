@@ -6,6 +6,7 @@ class WorkersController extends AppController
 {
     private $personalDataRepository;
     private $userAccountRepository;
+    private $farmRepository;
     private $messages = [];
 
     public function __construct()
@@ -13,12 +14,13 @@ class WorkersController extends AppController
         parent::__construct();
         $this->personalDataRepository = new PersonalDataRepository();
         $this->userAccountRepository = new UserAccountRepository();
+        $this->farmRepository = new FarmRepository();
         session_start();
     }
 
 
     public function workers(){
-        $workers = $this->personalDataRepository->findWorkersByFarm();
+        $workers = $this->personalDataRepository->findWorkersFromTheSameFarm();
         $this->render("workers", ['workers' => $workers]);
     }
 
@@ -40,6 +42,22 @@ class WorkersController extends AppController
 
     }
 
+    public function account(){
+        $this->render("account");
+    }
+
+    public function settings(){
+        $this->render("settings");
+    }
+
+    public function profileOverview(){
+        $farm = $this->farmRepository->getFarm($_SESSION['logged_in_user_farm_id']);
+        $worker = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+
+        return $this->render('profileOverview', ['farm' => $farm , 'worker' => $worker]);
+        $this->render("profileOverview");
+    }
+
     private function emailValidation($email){
         $exists = $this->userAccountRepository->getUserAccount($email);
         if ($exists === null){
@@ -49,6 +67,8 @@ class WorkersController extends AppController
             return false;
         }
     }
+
+
 
 
 }

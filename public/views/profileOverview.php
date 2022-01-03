@@ -76,17 +76,19 @@
            </header>
            <section class="farms-background">
                <div class="farm-picture-container">
-                   <img src="public/img/farms/farm 1.jpg"  id="farmhouse">
+                   <? if (isset($farm) && isset($worker)) : ?>
+                   <img src="public/uploads/<?= $farm->getImage(); ?>"  id="farmhouse">
                    <div>
-                       <h2 class="description">title </h2>
-                       <p class="description"> description</p>
+                       <h2 class="description"><?= $farm->getName(); ?> </h2>
+                       <p class="description"> Owner <?= $farm->findOwner()->__toString(); ?></p>
                    </div>
                 </div>
                 <div class="profile-picture">
                     <img src="public/img/placeholder.svg" id=picture-placeholder>
                     <h2 class="picture-description">
-                        Marc Johnson
+                        <?= $worker->getFirstName()." ".$worker->getLastName(); ?>
                     </h2>
+                    <?php endif; ?>
                 </div>
            </section>
        </main>
