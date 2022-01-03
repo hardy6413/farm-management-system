@@ -55,9 +55,11 @@ input,textarea{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid gray;
-    margin: 1em;
     width: 70%;
     font-size: 2vmin;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
 
 }
 
@@ -287,7 +289,7 @@ section.create-farm-form{
     display: flex;
     flex-direction: column;
     background: #D0E8D1 0% 0% no-repeat padding-box;
-    width: 70%;
+    width: 80%;
     justify-content: center;
     align-content: center;
     align-items: center;
@@ -305,8 +307,36 @@ section.create-farm-form{
 }
 
 .create-farm-form > form > input{
-    
     height: 8%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
+}
+
+.create-farm-form > form > div {
+    height: 8%;
+    display: flex;
+    width: 70%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.create-farm-form > form > div > *{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
+    width: auto;
+    font-size: 2vmin;
+    font: normal normal normal 600 2vmin Segoe UI;
+}
+
+.create-farm-form > form > div > input{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
+    margin-left: 1em;
+    height: 80%;
+    width: 5%;
 }
 
 select > option {

@@ -4,7 +4,7 @@ require_once __DIR__.'/../models/Field.php';
 class FieldRepository extends Repository
 {
     public function findFieldsByFarm(){
-        if (!isset($_SESSION['logged_in_user_farm_id'])){
+        if (!isset($_SESSION['logged_in_user_farm_id'])){ //todo o to spytac czy nie lepiej w kontrolerze?
             return null;
         }else {
             $stmt = $this->database->connect()->prepare('
@@ -25,5 +25,31 @@ class FieldRepository extends Repository
         }
 
     }
+
+    public function createField(Field $field, $logged_in_user_farm_id)
+    {
+        $stmt = $this->database->connect()->prepare('
+        INSERT INTO field (name ,description, area, extra_payment, block_number, is_property, farm_id, image)
+        VALUES  (?, ?, ?, ?, ?, ?, ?, ?)
+        ');
+
+        $property = true;
+        if ($field->isProperty() === false){
+            $property = 'false';
+        }
+
+        $stmt->execute([
+            $field->getName(),
+            $field->getDescription(),
+            $field->getArea(),
+            $field->getExtraPayment(),
+            $field->getBlockNumber(),
+            $property,
+            $logged_in_user_farm_id,
+            $field->getImage()
+        ]);
+
+    }
+
 
 }

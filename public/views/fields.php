@@ -92,7 +92,7 @@
                     </div>
                 </li>
                 <li class="field-navi-item">
-                 <a href="#" class="navi-button"> 
+                 <a href="/addField" class="navi-button">
                       add field</a>
                 </li>
             </ul>

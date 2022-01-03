@@ -30,14 +30,14 @@ class FarmController extends AppController
 
     public function createFarm(){
         if ($this ->isPost() && is_uploaded_file($_FILES['file']['tmp_name'])
-            && $this->validate($_FILES['file']))
+            && $this->validate($_FILES['file'],self::MAX_FILE_SIZE,self::SUPPORTED_TYPES))
         {
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
 
             $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
-            $_SESSION['logged_in_personal_data_id'] = $owner->getId();//todo to zamienilem
+            $_SESSION['logged_in_personal_data_id'] = $owner->getId();//todo to zamienilem nazwe zmiennej w sesji
             if ($owner->isOwner()){
                 $this->messages[] = 'You can not have two farms';
                 return $this->render('createFarm', ['messages' => $this->messages]);
@@ -48,7 +48,7 @@ class FarmController extends AppController
             $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
             $farm = new Farm($_POST['name'], $_FILES['file']['name'],1234,$address,array(), array($owner));
             $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
-
+            //todo token jakos generowany
             return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
                 ,'messages' => $this->messages]);
         }
@@ -97,17 +97,5 @@ class FarmController extends AppController
     }
 
 
-    private function validate(array $file) : bool {
-        if ($file['size'] > self::MAX_FILE_SIZE){
-            $this->messages[] = 'File is too large for destination file system.';
-            return false;
-        }
 
-        if (!isset($file['type']) && !in_array($file['type'], self::SUPPORTED_TYPES)){
-            $this->messages[] = 'File type is not supported';
-            return false;
-        }
-
-        return true;
-    }
 }

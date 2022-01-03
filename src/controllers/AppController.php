@@ -3,8 +3,6 @@
 class AppController {
 
     private $request;
-
-
     public function __construct()
     {
         $this->request = $_SERVER['REQUEST_METHOD'];
@@ -33,6 +31,21 @@ class AppController {
         }
 
         print $output;
+    }
+
+    protected function validate(array $file, $MAX_FILE_SIZE, $SUPPORTED_TYPES) : bool {
+        if ($file['size'] > $MAX_FILE_SIZE){
+            $this->messages[] = 'File is too large for destination file system.';
+            return false;
+
+        }
+
+        if (!isset($file['type']) && !in_array($file['type'], $SUPPORTED_TYPES)){
+            $this->messages[] = 'File type is not supported';
+            return false;
+        }
+
+        return true;
     }
 
 }

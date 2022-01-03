@@ -10,7 +10,7 @@ class Field extends BaseClass{
     private string $image;
 
 
-    public function __construct(string $name, string $description, float $area, float $extraPayment, string $blockNumber, bool $isProperty, string $image)
+    public function __construct($name, $description, $area, $extraPayment, $blockNumber, $isProperty, $image)
     {
         $this->name = $name;
         $this->description = $description;
