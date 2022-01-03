@@ -30,7 +30,7 @@ class FarmController extends AppController
 
     public function createFarm(){
         if ($this ->isPost() && is_uploaded_file($_FILES['file']['tmp_name'])
-            && $this->validate($_FILES['file'],self::MAX_FILE_SIZE,self::SUPPORTED_TYPES))
+            && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,self::SUPPORTED_TYPES))
         {
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
