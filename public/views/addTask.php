@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
-    <title>createFarm</title>
+    <title>add task</title>
 </head>
 
 <body>
@@ -55,9 +55,9 @@
            <header>
                 <div class ="search-bar">
                     <i class="fas fa-search"></i>
-                    <form>
+                    <div>
                         <input placeholder="search tasks " >
-                    </form>
+                    </div>
 
                 </div>
                 <div class="create-farm">
@@ -66,11 +66,16 @@
                 </div>
            </header>
            <section class="create-farm-form">
-            <form action="createFarm" method="POST" ENCTYPE="multipart/form-data">
+            <form action="addTask" method="POST" ENCTYPE="multipart/form-data">
                 <div class="messages">
-                    test
+                    <?php if(isset($messages)){
+                        foreach ($messages as $message){
+                            echo $message;
+                        }
+                    }
+                    ?>
                 </div>
-                <textarea name="address" rows=5 placeholder="Please provide task Description"></textarea>
+                <textarea name="description" rows=5 placeholder="Please provide task Description"></textarea>
 
                 <button type="submit">add task</button>
             </form>

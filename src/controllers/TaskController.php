@@ -15,13 +15,22 @@ class TaskController extends AppController
 
     public function tasks(){
         $tasks = $this->taskRepository->findTasksByFarm();
-        $this->render("tasks", ['tasks' => $tasks]);
+        $this->render("tasks", ['tasks' => $tasks, 'messages' => $this->messages]);
     }
 
 
 
+
     public function addTask(){
-        $this->render("addTask");
+        if ($this ->isPost() && isset($_POST['description'])){
+            $task = new Task($_POST['description'],false,null,null);
+            $this->taskRepository->addTask($task,$_SESSION['logged_in_user_farm_id'],
+                $_SESSION['logged_in_personal_data_id']);
+            return $this->tasks();
+        }else{
+            $this->messages[]= 'Something went wrong';
+        }
+        $this->render("addTask", ['messages' => $this->messages]);
     }
 
 }

@@ -4,79 +4,76 @@ require_once 'PersonalData.php';
 
 class Task extends BaseClass
 {
-    private string $description;
-    private bool $isCompleted;
-    private DateTime $created_at;
-    private PersonalData $personalData;
+    private $description;
+    private $isCompleted;
+    private $created_at;
+    private $personalData;
 
 
-    public function __construct(string $description, bool $isCompleted, DateTime $created_at, PersonalData $personalData)
+    public function __construct($description, $isCompleted, $created_at, $personalData)
     {
         $this->description = $description;
         $this->isCompleted = $isCompleted;
         $this->created_at = $created_at;
         $this->personalData = $personalData;
     }
-
 
     public function getId(): int
     {
         return $this->id;
     }
 
-
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
 
-
-    public function setDescription(string $description): void
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
 
 
-    public function isCompleted(): bool
+    public function getIsCompleted()
     {
         return $this->isCompleted;
     }
 
 
-    public function setIsCompleted(bool $isCompleted): void
+    public function setIsCompleted($isCompleted): void
     {
         $this->isCompleted = $isCompleted;
     }
 
 
-    public function getPersonalData(): PersonalData
-    {
-        return $this->personalData;
-    }
-
-
-    public function setPersonalData(PersonalData $personalData): void
-    {
-        $this->personalData = $personalData;
-    }
-
-
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt()
     {
         return $this->created_at;
     }
 
 
-    public function setCreatedAt(DateTime $created_at): void
+    public function setCreatedAt($created_at): void
     {
         $this->created_at = $created_at;
     }
+
+
+    public function getPersonalData()
+    {
+        return $this->personalData;
+    }
+
+
+    public function setPersonalData($personalData): void
+    {
+        $this->personalData = $personalData;
+    }
+
 
 
 

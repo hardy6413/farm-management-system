@@ -21,10 +21,27 @@ class TaskRepository extends Repository
             $foundTasks = [];
             foreach ($tasks as $task) {
                 $foundTasks[] = new Task($task['description'], $task['is_completed'], $task['created_at'],
-                    new PersonalData($task[['first_name']],$task['last_name'],null,null));
+                    new PersonalData($task['first_name'],$task['last_name'],null,null));
             }
             return $foundTasks;
-        }//todo wytestowac
+        }//todo task nie powinien miec personal data raczej
+    }
+
+    public function addTask(Task $task, $logged_in_user_farm_id, $logged_in_personal_data_id)
+    {
+        $stmt = $this->database->connect()->prepare('
+        INSERT INTO task (description, is_completed, farm_id, personal_data_id)
+        VALUES  (?, ?, ?, ?)
+        ');
+
+
+        $stmt->execute([
+            $task->getDescription(),
+            'false',
+            $logged_in_user_farm_id,
+            $logged_in_personal_data_id
+        ]);
+
     }
 
 }

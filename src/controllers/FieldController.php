@@ -9,7 +9,6 @@ class FieldController extends AppController
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
-    private $messages = [];
     private $fieldRepository;
 
     public function __construct()
@@ -24,9 +23,10 @@ class FieldController extends AppController
         $this->render("fields", ['fields' => $fields]);
     }
 
-    public function createField(){
+    public function addField(){
         if ($this ->isPost() && is_uploaded_file($_FILES['file']['tmp_name'])
-            && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,self::SUPPORTED_TYPES)){
+            && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,
+                self::SUPPORTED_TYPES,$this->messages)){
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
@@ -40,15 +40,12 @@ class FieldController extends AppController
             if (isset($_SESSION['logged_in_user_farm_id'])){
                 $this->fieldRepository->createField($field, $_SESSION['logged_in_user_farm_id']);
             }
-            $this->fields();
+            return $this->fields();
         }else{
             return $this->render('addField', ['messages' => $this->messages]);
         }
     }
 
-    public function addField(){
-        $this->render('addField');
-    }
 
     public function fieldOverview(){
         $this->render('fieldOverview');

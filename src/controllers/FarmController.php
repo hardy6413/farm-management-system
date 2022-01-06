@@ -13,7 +13,6 @@ class FarmController extends AppController
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
-    private $messages = [];
     private $userRepository;
     private $farmRepository;
     private $personalDataRepository;
@@ -30,7 +29,8 @@ class FarmController extends AppController
 
     public function createFarm(){
         if ($this ->isPost() && is_uploaded_file($_FILES['file']['tmp_name'])
-            && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,self::SUPPORTED_TYPES))
+            && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,
+                self::SUPPORTED_TYPES, $this->messages))
         {
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);

@@ -89,7 +89,7 @@
                          delete task</a>
                    </li>
                 <li class="field-navi-item">
-                 <a href="#" class="navi-button"> 
+                 <a href="/addTask" class="navi-button">
                       add task</a>
                 </li>
             </ul>

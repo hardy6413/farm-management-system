@@ -7,7 +7,6 @@ class WorkersController extends AppController
     private $personalDataRepository;
     private $userAccountRepository;
     private $farmRepository;
-    private $messages = [];
 
     public function __construct()
     {

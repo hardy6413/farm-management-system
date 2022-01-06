@@ -3,6 +3,7 @@
 class AppController {
 
     private $request;
+    protected $messages = [];
     public function __construct()
     {
         $this->request = $_SERVER['REQUEST_METHOD'];
@@ -24,7 +25,6 @@ class AppController {
         if (file_exists($templatePath)){
             extract($variables);
 
-
             ob_start();
             include $templatePath;
             $output = ob_get_clean();
@@ -33,18 +33,21 @@ class AppController {
         print $output;
     }
 
-    protected function validateImage(array $file, $MAX_FILE_SIZE, $SUPPORTED_TYPES) : bool {
-        if ($file['size'] > $MAX_FILE_SIZE){
-            $this->messages[] = 'File is too large for destination file system.';
-            return false;
+    protected function validateImage(array $file, $MAX_FILE_SIZE, $SUPPORTED_TYPES, &$messagesArray) : bool {
 
+        if ($file['size'] === 0){
+            $messagesArray[] = 'No file uploaded';
+            return false;
+        }
+        if ($file['size'] > $MAX_FILE_SIZE){
+            $messagesArray[] = 'File is too large for destination file system.';
+            return false;
         }
 
         if (!isset($file['type']) && !in_array($file['type'], $SUPPORTED_TYPES)){
-            $this->messages[] = 'File type is not supported';
+            $messagesArray[] = 'File type is not supported';
             return false;
         }
-
         return true;
     }
 

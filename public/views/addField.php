@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./public/js/FieldFormValidation.js" defer></script>
     <title>add field</title>
 </head>
 
@@ -66,8 +67,15 @@
                 </div>
            </header>
            <section class="create-farm-form">
-            <form action="createField" method="POST" ENCTYPE="multipart/form-data">
-                <div class="messages"></div>
+            <form action="addField" method="POST" ENCTYPE="multipart/form-data" id="field-form">
+                <div class="messages">
+                    <?php if(isset($messages)){
+                        foreach ($messages as $message){
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </div>
                 <input name="name" type="text" placeholder="field name">
                 <textarea name="description" rows=5 placeholder="field description"></textarea>
                 <input name="area" type="number"  step="0.01" placeholder="area">

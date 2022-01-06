@@ -9,7 +9,7 @@ Router::get('', 'DefaultController');
 Router::post('login', 'SecurityController');
 Router::post('createFarm', 'FarmController');
 Router::get('fields', 'FieldController');
-Router::get('addField', 'FieldController');
+Router::post('addField', 'FieldController');
 Router::get('fieldOverview', 'FieldController');
 Router::get('tasks', 'TaskController');
 Router::post('addTask', 'TaskController');
@@ -23,7 +23,6 @@ Router::post('logout','SecurityController');
 Router::get('createAccount','WorkersController');
 Router::post('signUp','WorkersController');
 Router::post('joinFarm', 'FarmController');
-Router::post('createField', 'FieldController');
 
 Router::run($path);
 
