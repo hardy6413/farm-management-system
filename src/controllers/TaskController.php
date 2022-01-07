@@ -23,14 +23,17 @@ class TaskController extends AppController
 
     public function addTask(){
         if ($this ->isPost() && isset($_POST['description'])){
-            $task = new Task($_POST['description'],false,null,null);
-            $this->taskRepository->addTask($task,$_SESSION['logged_in_user_farm_id'],
-                $_SESSION['logged_in_personal_data_id']);
-            return $this->tasks();
+            if ($this->checkIfInputIsEmpty($this->messages)){
+                $task = new Task($_POST['description'],false,null,null);
+                $this->taskRepository->addTask($task,$_SESSION['logged_in_user_farm_id'],
+                    $_SESSION['logged_in_personal_data_id']);
+                return $this->tasks();
+            }else{
+                return $this->render("addTask", ['messages' => $this->messages]);
+            }
         }else{
-            $this->messages[]= 'Something went wrong';
+            return $this->render("addTask", ['messages' => $this->messages]);
         }
-        $this->render("addTask", ['messages' => $this->messages]);
     }
 
 }

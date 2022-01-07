@@ -18,7 +18,7 @@ class WorkersController extends AppController
     }
 
 
-    public function workers(){
+    public function listWorkers(){
         $workers = $this->personalDataRepository->findWorkersFromTheSameFarm();
         $this->render("workers", ['workers' => $workers]);
     }
@@ -29,11 +29,15 @@ class WorkersController extends AppController
 
     public function signUp(){
         if ($this->isPost() && $this->emailValidation($_POST['email'])){
-            $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
-            $personalData = new PersonalData($_POST['name'],$_POST['lastname'],$address,false);
-            $newUserAccount = new UserAccount($_POST['email'],$_POST['password']);
-            $this->personalDataRepository->createAccount($address,$personalData,$newUserAccount);
-            return $this->render('login');
+            if ($this->checkIfInputIsEmpty($this->messages)){
+                $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
+                $personalData = new PersonalData($_POST['name'],$_POST['lastname'],$address,false);
+                $newUserAccount = new UserAccount($_POST['email'],$_POST['password']);
+                $this->personalDataRepository->createAccount($address,$personalData,$newUserAccount);
+                return $this->render('login');
+            }else{
+                return $this->render('createAccount', ['messages' => $this->messages]);
+            }
         }
         else{
             return $this->render('createAccount', ['messages' => $this->messages]);

@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./public/js/script.js" defer></script>
+    <script type="text/javascript" src="./public/js/EmptyFormValidation.js" defer></script>
     <title>Register</title>
 </head>
 
@@ -13,7 +14,7 @@
     <main class="main-container">
         <img src="public/img/logo.svg">
         <section class="create-account-form">
-            <form action="signUp" method="POST">
+            <form action="signUp" method="POST" name="standard-form">
                 <div class="messages">
                     <?php if(isset($messages)){
                         foreach ($messages as $message){

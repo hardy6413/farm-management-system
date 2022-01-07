@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./public/js/FieldFormValidation.js" defer></script>
+    <script type="text/javascript" src="./public/js/EmptyFormValidation.js" defer></script>
     <title>add field</title>
 </head>
 
@@ -62,12 +62,12 @@
 
                 </div>
                 <div class="create-farm">
-                    <i class="fas fa-plus"></i>
-                    add field
+                    <a href="/addField" class="navi-button">
+                        add task</a>
                 </div>
            </header>
            <section class="create-farm-form">
-            <form action="addField" method="POST" ENCTYPE="multipart/form-data" id="field-form">
+            <form action="addField" method="POST" ENCTYPE="multipart/form-data" id="field-form" name="standard-form">
                 <div class="messages">
                     <?php if(isset($messages)){
                         foreach ($messages as $message){

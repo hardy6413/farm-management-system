@@ -67,7 +67,7 @@
                  </a>
                 </li>
                 <li class="farm-navi-item">
-                 <a href="/workers" class="navi-button">
+                 <a href="/listWorkers" class="navi-button">
                       workers</a>
                 </li>
                 <li class="farm-navi-item">

@@ -4,6 +4,7 @@ class AppController {
 
     private $request;
     protected $messages = [];
+
     public function __construct()
     {
         $this->request = $_SERVER['REQUEST_METHOD'];
@@ -47,6 +48,16 @@ class AppController {
         if (!isset($file['type']) && !in_array($file['type'], $SUPPORTED_TYPES)){
             $messagesArray[] = 'File type is not supported';
             return false;
+        }
+        return true;
+    }
+
+    protected function checkIfInputIsEmpty(&$messageArray) : bool{
+        foreach ($_POST as $input){
+            if (strlen($input) === 0){
+                $messageArray[] ='You need to fill every blank';
+                return false;
+            }
         }
         return true;
     }

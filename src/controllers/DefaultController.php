@@ -8,5 +8,4 @@ class DefaultController extends AppController {
         $this->render('login');
     }
 
-
 }

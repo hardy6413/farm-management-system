@@ -30,17 +30,21 @@ class FieldController extends AppController
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
-            if (isset($_POST['is-property'])){
-                $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
-                    $_POST['block-number'], $_POST['is-property'], $_FILES['file']['name']);
+            if ($this->checkIfInputIsEmpty($this->messages)){
+                if (isset($_POST['is-property'])){
+                    $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
+                        $_POST['block-number'], $_POST['is-property'], $_FILES['file']['name']);
+                }else{
+                    $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
+                        $_POST['block-number'], false, $_FILES['file']['name']);
+                }
+                if (isset($_SESSION['logged_in_user_farm_id'])){
+                    $this->fieldRepository->createField($field, $_SESSION['logged_in_user_farm_id']);
+                }
+                return $this->fields();
             }else{
-                $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
-                    $_POST['block-number'], false, $_FILES['file']['name']);
+                return $this->render('addField', ['messages' => $this->messages]);
             }
-            if (isset($_SESSION['logged_in_user_farm_id'])){
-                $this->fieldRepository->createField($field, $_SESSION['logged_in_user_farm_id']);
-            }
-            return $this->fields();
         }else{
             return $this->render('addField', ['messages' => $this->messages]);
         }

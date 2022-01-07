@@ -32,25 +32,30 @@ class FarmController extends AppController
             && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,
                 self::SUPPORTED_TYPES, $this->messages))
         {
-            move_uploaded_file($_FILES['file']['tmp_name'],
-                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
+            if ($this->checkIfInputIsEmpty($this->messages)){
+                move_uploaded_file($_FILES['file']['tmp_name'],
+                    dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
 
-            $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
-            $_SESSION['logged_in_personal_data_id'] = $owner->getId();//todo to zamienilem nazwe zmiennej w sesji
-            if ($owner->isOwner()){
-                $this->messages[] = 'You can not have two farms';
-                return $this->render('createFarm', ['messages' => $this->messages]);
+                $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+                $_SESSION['logged_in_personal_data_id'] = $owner->getId();//todo to zamienilem nazwe zmiennej w sesji
+                if ($owner->isOwner()){
+                    $this->messages[] = 'You can not have two farms';
+                    return $this->render('createFarm', ['messages' => $this->messages]);
+                }else{
+                    $owner->setIsOwner(true);
+                }
+
+                $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
+                $farm = new Farm($_POST['name'], $_FILES['file']['name'],1234,$address,array(), array($owner));
+                $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
+                //todo token jakos generowany
+                return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
+                    ,'messages' => $this->messages]);
             }else{
-                $owner->setIsOwner(true);
+                return $this->render('createFarm', ['messages' => $this->messages]);
             }
 
-            $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
-            $farm = new Farm($_POST['name'], $_FILES['file']['name'],1234,$address,array(), array($owner));
-            $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
-            //todo token jakos generowany
-            return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
-                ,'messages' => $this->messages]);
         }
         return $this->render('createFarm', ['messages' => $this->messages]);
     }

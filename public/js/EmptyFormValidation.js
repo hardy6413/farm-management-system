@@ -1,8 +1,6 @@
-
-const form = document.querySelector('form[id="field-form"]');
-
-const inputElements = form.getElementsByTagName("input");
-const textAreaElements = form.getElementsByTagName("textarea");
+const formToValidate = document.querySelector('form[name="standard-form"]');
+const inputElements = formToValidate.getElementsByTagName("input");
+const textAreaElements = formToValidate.getElementsByTagName("textarea");
 const elements = [...inputElements, ...textAreaElements];
 
 
@@ -25,4 +23,4 @@ function  validateEveryInput(){
 
 }
 
-form.addEventListener('click',validateEveryInput)
+formToValidate.addEventListener('keyup',validateEveryInput)

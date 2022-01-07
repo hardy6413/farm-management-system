@@ -13,7 +13,7 @@ Router::post('addField', 'FieldController');
 Router::get('fieldOverview', 'FieldController');
 Router::get('tasks', 'TaskController');
 Router::post('addTask', 'TaskController');
-Router::get('workers', 'WorkersController');
+Router::get('listWorkers', 'WorkersController');
 Router::get('account', 'WorkersController');
 Router::get('settings', 'WorkersController');
 Router::get('profileOverview', 'WorkersController');
