@@ -23,7 +23,6 @@ class FarmController extends AppController
         $this->userRepository = new UserAccountRepository();
         $this->farmRepository = new FarmRepository();
         $this->personalDataRepository = new PersonalDataRepository();
-        session_start();
     }
 
 

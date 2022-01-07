@@ -10,6 +10,7 @@ require_once 'src/controllers/WorkersController.php';
 class Router {
 
     public static $routes;
+    private static $controller;
 
     public static function get($url, $view) {
         self::$routes[$url] = $view;
@@ -25,8 +26,17 @@ class Router {
             die("Wrong url!");
         }
 
-        $controller = self::$routes[$action];
-        $object = new $controller;
+        if(session_status() !== PHP_SESSION_ACTIVE){
+            session_start();
+        }
+        if (!isset($_COOKIE['user']) && ( $action !== 'signUp' && $action !== 'login')){
+            self::$controller = self::$routes['login'];
+            $action = 'login';
+        }else{
+            self::$controller = self::$routes[$action];
+        }
+
+        $object = new self::$controller;
         $action = $action ?: 'index';
 
         $object->$action();

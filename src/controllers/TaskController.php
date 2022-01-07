@@ -10,7 +10,6 @@ class TaskController extends AppController
     {
         parent::__construct();
         $this->taskRepository = new TaskRepository();
-        session_start();
     }
 
     public function tasks(){

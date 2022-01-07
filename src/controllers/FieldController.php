@@ -15,7 +15,6 @@ class FieldController extends AppController
     {
         parent::__construct();
         $this->fieldRepository = new FieldRepository();
-        session_start();
     }
 
     public function fields(){

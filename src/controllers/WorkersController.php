@@ -14,7 +14,6 @@ class WorkersController extends AppController
         $this->personalDataRepository = new PersonalDataRepository();
         $this->userAccountRepository = new UserAccountRepository();
         $this->farmRepository = new FarmRepository();
-        session_start();
     }
 
 

@@ -20,12 +20,14 @@ class SecurityController extends AppController
         $this->userAccountRepository = new UserAccountRepository();
         $this->farmRepository = new FarmRepository();
         $this->personalDataRepository = new PersonalDataRepository();
-        session_start();
     }
 
 
     public function login(){
         if (!$this->isPost()){
+            if (!isset($_COOKIE['user'])){
+                $this->messages[] = 'session expired';
+            }
             return $this->render('login');
         }
 
