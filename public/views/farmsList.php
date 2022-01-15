@@ -69,7 +69,7 @@
             </div>
        </header>
            <section class="farms-list-background">
-               <div class="messages" id="farms-list-message">
+               <div class="messages" id="farms-list-message" >
                    <?php if(isset($messages)){
                        foreach ($messages as $message){
                            echo $message;

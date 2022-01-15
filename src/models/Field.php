@@ -1,16 +1,18 @@
 <?php
 
 class Field extends BaseClass{
-    private string $name;
-    private string $description;
-    private float $area;
-    private float $extraPayment;
-    private string $blockNumber;
-    private bool $isProperty;
-    private string $image;
+    private  $name;
+    private  $description;
+    private  $area;
+    private  $extraPayment;
+    private  $blockNumber;
+    private  $isProperty;
+    private  $image;
+    private  $fieldActions = []; //todo
 
 
-    public function __construct($name, $description, $area, $extraPayment, $blockNumber, $isProperty, $image)
+
+    public function __construct($name, $description, $area, $extraPayment, $blockNumber, $isProperty, $image, $actions,$id = null)
     {
         $this->name = $name;
         $this->description = $description;
@@ -19,6 +21,8 @@ class Field extends BaseClass{
         $this->blockNumber = $blockNumber;
         $this->isProperty = $isProperty;
         $this->image = $image;
+        $this->fieldActions = $actions;
+        $this->setId($id);
     }
 
     public function __toString(){
@@ -27,101 +31,109 @@ class Field extends BaseClass{
     }
 
 
-    public function getId(): int
+    public function getFieldActions()
+    {
+        return $this->fieldActions;
+    }
+
+
+    public function setFieldActions($fieldActions): void
+    {
+        $this->fieldActions = $fieldActions;
+    }
+
+
+
+
+    public function getId()
     {
         return $this->id;
     }
 
 
-    public function setId(int $id): void
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
 
-
-    public function setName(string $name): void
+    public function setName($name): void
     {
         $this->name = $name;
     }
 
-
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): void
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
 
 
-    public function getArea(): float
+    public function getArea()
     {
         return $this->area;
     }
 
 
-    public function setArea(float $area): void
+    public function setArea($area): void
     {
         $this->area = $area;
     }
 
 
-    public function getExtraPayment(): float
+    public function getExtraPayment()
     {
         return $this->extraPayment;
     }
 
 
-    public function setExtraPayment(float $extraPayment): void
+    public function setExtraPayment($extraPayment): void
     {
         $this->extraPayment = $extraPayment;
     }
 
 
-    public function getBlockNumber(): string
+    public function getBlockNumber()
     {
         return $this->blockNumber;
     }
 
 
-    public function setBlockNumber(string $blockNumber): void
+    public function setBlockNumber($blockNumber): void
     {
         $this->blockNumber = $blockNumber;
     }
 
 
-    public function isProperty(): bool
+    public function getIsProperty()
     {
         return $this->isProperty;
     }
 
 
-    public function setIsProperty(bool $isProperty): void
+    public function setIsProperty($isProperty): void
     {
         $this->isProperty = $isProperty;
     }
 
 
-    public function getImage(): string
+    public function getImage()
     {
         return $this->image;
     }
 
 
-    public function setImage(string $image): void
+    public function setImage($image): void
     {
         $this->image = $image;
     }
 
-
-
-
-}
+    }

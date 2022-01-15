@@ -16,11 +16,11 @@ function markValidation(element, condition) {
 function  validateEveryInput(){
     setTimeout(function (){
             for (let i = 0; i < elements.length; i++) {
-                markValidation(elements[i],emptyInputCondition(elements[i].value))
+                markValidation(elements[i],emptyInputCondition(elements[i].value));
             }
         }
         , 1000);
 
 }
 
-formToValidate.addEventListener('keyup',validateEveryInput)
+formToValidate.addEventListener('keyup',validateEveryInput);

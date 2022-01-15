@@ -1,8 +1,6 @@
 <?php
 
 class BaseClass {
-    private int $id;
-
-
+    protected $id;
 
 }

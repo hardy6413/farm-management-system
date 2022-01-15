@@ -23,6 +23,7 @@ Router::post('logout','SecurityController');
 Router::get('createAccount','WorkersController');
 Router::post('signUp','WorkersController');
 Router::post('joinFarm', 'FarmController');
+Router::get('createAction','FieldActionController');
 
 Router::run($path);
 

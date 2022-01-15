@@ -127,3 +127,8 @@ main > div{
     padding-top: 0;
     margin-bottom: 2em;
 }
+
+
+#action-inputs{
+    display: none;
+}

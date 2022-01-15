@@ -109,9 +109,9 @@
                      <a href="#" class="field-options">
                           Inspect on map
                          </a>
-                         <a href="#" class="field-options">
+                         <a href="/fieldOverview/<?= $field->getId(); ?>" class="field-options" >
                             Past actions and notes
-                           </a> 
+                           </a>
                     </div>
                     <a href="#" class="delete-icon">
                         <i class="fas fa-trash"  id="delete-field"></i>

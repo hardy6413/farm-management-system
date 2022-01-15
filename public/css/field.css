@@ -166,6 +166,12 @@
     margin: 0;
     width: 40%;
     font: normal normal bold 1.5vmin Segoe UI;
+    background: #D4CB9D 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    opacity: 1;
+    border: none;
+    text-align: center;
+    color: #846F00;
 }
 
 

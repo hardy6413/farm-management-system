@@ -32,10 +32,10 @@ class FieldController extends AppController
             if ($this->checkIfInputIsEmpty($this->messages)){
                 if (isset($_POST['is-property'])){
                     $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
-                        $_POST['block-number'], $_POST['is-property'], $_FILES['file']['name']);
+                        $_POST['block-number'], $_POST['is-property'], $_FILES['file']['name'],null);
                 }else{
                     $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
-                        $_POST['block-number'], false, $_FILES['file']['name']);
+                        $_POST['block-number'], false, $_FILES['file']['name'],null);
                 }
                 if (isset($_SESSION['logged_in_user_farm_id'])){
                     $this->fieldRepository->createField($field, $_SESSION['logged_in_user_farm_id']);
@@ -50,7 +50,8 @@ class FieldController extends AppController
     }
 
 
-    public function fieldOverview(){
-        $this->render('fieldOverview');
+    public function fieldOverview($id){
+        $field = $this->fieldRepository->findFieldById($id);
+        return $this->render('fieldOverview',['field' => $field]);
     }
 }

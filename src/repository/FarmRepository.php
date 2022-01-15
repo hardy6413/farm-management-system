@@ -117,7 +117,7 @@ class FarmRepository extends Repository
     private function findFieldsByFarm($farm): array
     {
         $stmt = $this->database->connect()->prepare('
-                SELECT f.name, f.description, f.area, f.extra_payment, f.block_number, f.is_property, f.image
+                SELECT f.id, f.name, f.description, f.area, f.extra_payment, f.block_number, f.is_property, f.image
                 FROM field f, farm fa
                 WHERE f.farm_id = fa.id and fa.id=:id
             ');
@@ -125,10 +125,12 @@ class FarmRepository extends Repository
         $stmt->execute();
         $fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $fieldRepository = new FieldRepository();
         $foundFields = [];
         foreach ($fields as $field) {
             $foundFields[] = new Field($field['name'], $field['description'], $field['area'], $field['extra_payment'],
-                $field['block_number'], $field['is_property'], $field['image']);
+                $field['block_number'], $field['is_property'], $field['image'],
+                $fieldRepository->findFieldActionsByFieldId($field['id']));
         }
         return $foundFields;
     }
