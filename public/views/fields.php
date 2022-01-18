@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
     <link rel="stylesheet" type="text/css" href="public/css/overview.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/public/js/NavigationDisplaying.js" defer></script>
     <title>Fields</title>
 </head>
 

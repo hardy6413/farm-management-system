@@ -187,7 +187,7 @@ li>div{
 .workers-list{
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
 }
 
@@ -392,6 +392,44 @@ li>div{
   .slider.round:before {
     border-radius: 50%;
   }
+
+
+@media only screen and (max-device-width: 780px) {
+    .navi-header{
+        display: none;
+        border: none;
+        margin-bottom: 2em;
+    }
+    main > section > ul {
+        display: flex;
+        flex-direction: column;
+        height: 90%;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        justify-content: flex-start;
+    }
+    .picture-description{
+        font-size: 2vmax;
+    }
+    .workers-list{
+        justify-content: flex-start;
+    }
+    .farm-navi{
+        flex-direction: column;
+        height: 100%;
+        gap: 1em;
+    }
+    .navi-button{
+        width: auto;
+        border-radius: 1em;
+    }
+    .farm-navi-item{
+        width: calc(70% - 100px);
+        border-radius: 10em;
+    }
+
+}
+
 
 
 

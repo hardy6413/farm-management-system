@@ -3,7 +3,9 @@
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/farms.css">
     <link rel="stylesheet" type="text/css" href="public/css/overview.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/hideUpperNaviOnLinkedViews.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/public/js/NavigationDisplaying.js" defer></script>
     <title>Settings</title>
 </head>
 
@@ -11,7 +13,7 @@
     <div class="base-container">
         <?php include('leftNavi.php')?>
        <main>
-           
+           <?php include('upperNavi.php')?>
            <section class="farms-background">
             <ul class="settings-navi">
                 <li class="settings-navi-item">

@@ -24,7 +24,7 @@
                     <input name=" email " type="text " placeholder="email@email.com ">
                     <input name="password " type="text " placeholder="password ">
                     <div class="login-buttons-container">
-                        <button type="submit">log in</button>
+                        <button type="submit" class="sign-up-button">log in</button>
                         <a href="/createAccount" class="sign-up-button">sign up</a>
                     </div>
                 </form>
