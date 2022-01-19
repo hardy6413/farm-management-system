@@ -295,8 +295,9 @@ li>div{
     font: normal normal bold 2.5vmin Segoe UI;
     letter-spacing: 0.3px;
     color: #846F00;
-    width: auto;
+    width: 95%;
     margin: 0;
+    white-space: normal;
 }
 
 .field-options{
@@ -314,7 +315,7 @@ li>div{
     padding: 1em;
     align-items: flex-start;
     justify-content: flex-start;
-    height: 90%;
+    height: 100%;
     width: 45%;
 }
 

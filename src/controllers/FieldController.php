@@ -32,9 +32,9 @@ class FieldController extends AppController
             if ($this->checkIfInputIsEmpty($this->messages)){
                 if (isset($_POST['is-property'])){
                     $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
-                        $_POST['block-number'], $_POST['is-property'], $_FILES['file']['name'],null);
+                        $_POST['block-number'], $_POST['is-property'], $_FILES['file']['name'],null); //field is a property
                 }else{
-                    $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'],
+                    $field = new Field($_POST['name'],$_POST['description'],$_POST['area'],$_POST['extra-payment'], //field is not an owners property
                         $_POST['block-number'], false, $_FILES['file']['name'],null);
                 }
                 if (isset($_SESSION['logged_in_user_farm_id'])){

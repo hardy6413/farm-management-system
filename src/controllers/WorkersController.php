@@ -20,7 +20,8 @@ class WorkersController extends AppController
     }
 
     public function account(){
-        $this->render("account");
+        $worker = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+        $this->render("account", ['worker' => $worker]);
     }
 
     public function settings(){

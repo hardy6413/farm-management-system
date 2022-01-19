@@ -7,7 +7,6 @@ require_once __DIR__.'/../repository/FieldActionRepository.php';
 
 class FieldActionController extends AppController
 {
-
     private $fieldActionRepository;
     private $fieldRepository;
 
@@ -19,9 +18,9 @@ class FieldActionController extends AppController
     }
 
 
-    public function createAction($fieldId){//todo id pola
-        if ($this->isPost() && strlen($_POST['action']) !== 0){
-            $params = $this->createParams(strtolower($_POST['action']));
+    public function createAction($fieldId){
+        if ($this->isPost() && strlen($_POST['action']) !== 0 && $fieldId !== null){
+            $params = $this->createActionParams(strtolower($_POST['action']));
             $this->fieldActionRepository->addFieldAction($fieldId, $_SESSION['logged_in_personal_data_id'],$params,strtolower($_POST['action']));
             $this->render('fieldOverview', ['field' => $this->fieldRepository->findFieldById($fieldId)]);
         }else{
@@ -30,7 +29,7 @@ class FieldActionController extends AppController
     }
 
 
-    private function createParams($actionName): ?array
+    private function createActionParams($actionName): ?array
     {
         $params = [];
         foreach($_POST as $name => $value) {

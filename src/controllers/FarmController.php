@@ -13,14 +13,12 @@ class FarmController extends AppController
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
-    private $userRepository;
     private $farmRepository;
     private $personalDataRepository;
 
     public function __construct()
     {
         parent::__construct();
-        $this->userRepository = new UserAccountRepository();
         $this->farmRepository = new FarmRepository();
         $this->personalDataRepository = new PersonalDataRepository();
     }
@@ -28,33 +26,33 @@ class FarmController extends AppController
 
     public function createFarm(){
         if ($this ->isPost() && is_uploaded_file($_FILES['file']['tmp_name'])
-            && $this->validateImage($_FILES['file'],self::MAX_FILE_SIZE,
-                self::SUPPORTED_TYPES, $this->messages))
+            && $this->validateImage($_FILES['file'],
+                self::MAX_FILE_SIZE,
+                self::SUPPORTED_TYPES,
+                $this->messages))
         {
-            if ($this->checkIfInputIsEmpty($this->messages)){
+            if ($this->checkIfInputIsEmpty($this->messages) && $this->checkIfUserIsAlreadyOwner()){
                 move_uploaded_file($_FILES['file']['tmp_name'],
                     dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
 
 
-                $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
-                $_SESSION['logged_in_personal_data_id'] = $owner->getId();//todo to zamienilem nazwe zmiennej w sesji
-                if ($owner->isOwner()){
-                    $this->messages[] = 'You can not have two farms';
-                    return $this->render('createFarm', ['messages' => $this->messages]);
-                }else{
-                    $owner->setIsOwner(true);
-                }
+                $farmAddress = new Address($_POST['street'],
+                    $_POST['city'],
+                    $_POST['postal-code'],
+                    $_POST['building-number']);
 
-                $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
-                $farm = new Farm($_POST['name'], $_FILES['file']['name'],1234,$address,array(), array($owner));
+                $farm = new Farm($_POST['name'],
+                    $_FILES['file']['name'],
+                    $this->generateFarmToken()
+                    ,$farmAddress,
+                    array(),
+                    array());
+
                 $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
-                //todo token jakos generowany
+
                 return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
                     ,'messages' => $this->messages]);
-            }else{
-                return $this->render('createFarm', ['messages' => $this->messages]);
             }
-
         }
         return $this->render('createFarm', ['messages' => $this->messages]);
     }
@@ -76,7 +74,6 @@ class FarmController extends AppController
 
     public function farmsList(){
         $farms = $this->farmRepository->getFarms();
-
         $this->render('farmsList', ['farms' => $farms]);
     }
 
@@ -100,6 +97,24 @@ class FarmController extends AppController
         }
     }
 
+    private function generateFarmToken(): string
+    {
+        $token = openssl_random_pseudo_bytes(3);
+        return bin2hex($token);
+    }
+
+    public function checkIfUserIsAlreadyOwner(): bool
+    {
+        $owner = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+        $_SESSION['logged_in_personal_data_id'] = $owner->getId();
+
+        if ($owner->isOwner()) {
+            $this->messages[] = 'You can not have two farms';
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 
 }

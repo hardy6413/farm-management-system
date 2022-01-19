@@ -37,7 +37,7 @@ class FieldRepository extends Repository
         ');
 
         $property = true;
-        if ($field->isProperty() === false){
+        if ($field->getIsProperty() === false){
             $property = 'false';
         }
 

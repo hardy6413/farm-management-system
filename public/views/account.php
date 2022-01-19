@@ -16,6 +16,7 @@
        <main>
            <?php include('upperNavi.php')?>
            <section class="farms-background">
+               <? if (isset($worker)) : ?>
             <ul class="account-navi">
                 <li class="farm-navi-item">
                  <a href="#" class="navi-button">
@@ -54,9 +55,10 @@
                 <div class="profile-picture">
                     <img src="public/img/placeholder.svg" id=picture-placeholder>
                     <h2 class="picture-description">
-                        Marc Johnson
+                        <?= $worker->getFirstName()." ".$worker->getLastName(); ?>
                     </h2>
                 </div>
+               <?php endif; ?>
            </section>
        </main>
     </div>

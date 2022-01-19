@@ -5,6 +5,9 @@ const elements = [...inputElements, ...textAreaElements];
 
 
 function emptyInputCondition(input){
+    if (input.type !== 'file'){
+
+    }
     return input.length === 0;
 }
 
@@ -23,4 +26,5 @@ function  validateEveryInput(){
 
 }
 
-formToValidate.addEventListener('keyup',validateEveryInput);
+formToValidate.addEventListener('input',validateEveryInput);
+

@@ -17,9 +17,6 @@ class TaskController extends AppController
         $this->render("tasks", ['tasks' => $tasks, 'messages' => $this->messages]);
     }
 
-
-
-
     public function addTask(){
         if ($this ->isPost() && isset($_POST['description'])){
             if ($this->checkIfInputIsEmpty($this->messages)){

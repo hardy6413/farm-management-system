@@ -4,15 +4,15 @@ require_once 'UserAccount.php';
 
 class Farm extends BaseClass{
 
-    private string $name;
-    private string $image;
-    private int $token;
-    private Address  $farmAddress;
+    private $name;
+    private $image;
+    private $token;
+    private $farmAddress;
     private $fields = [];
     private $workers = [];
 
 
-    public function __construct(string $name, string $image, int $token, Address $farmAddress, array $fields, array $workers)
+    public function __construct($name, $image, $token,  $farmAddress, $fields, $workers)
     {
         $this->name = $name;
         $this->image = $image;
@@ -22,63 +22,74 @@ class Farm extends BaseClass{
         $this->workers = $workers;
     }
 
-
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
-
-    public function setId(int $id): void
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
 
-
-    public function setName(string $name): void
+    public function setName($name): void
     {
         $this->name = $name;
     }
 
-
-    public function getImage(): string
+    public function getImage()
     {
         return $this->image;
     }
 
-
-    public function setImage(string $image): void
+    public function setImage($image): void
     {
         $this->image = $image;
     }
 
-
-    public function getToken(): int
+    public function getToken()
     {
         return $this->token;
     }
 
-
-    public function setToken(int $token): void
+    public function setToken($token): void
     {
         $this->token = $token;
     }
 
-
-    public function getFarmAddress(): Address
+    public function getFarmAddress()
     {
         return $this->farmAddress;
     }
 
-
-    public function setFarmAddress(Address $farmAddress): void
+    public function setFarmAddress($farmAddress): void
     {
         $this->farmAddress = $farmAddress;
+    }
+
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    public function setFields(array $fields): void
+    {
+        $this->fields = $fields;
+    }
+
+    public function getWorkers(): array
+    {
+        return $this->workers;
+    }
+
+    public function setWorkers(array $workers): void
+    {
+        $this->workers = $workers;
     }
 
     public function findOwner(){
