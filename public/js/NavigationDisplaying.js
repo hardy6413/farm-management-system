@@ -14,10 +14,10 @@ myFarmMenu.addEventListener('click',showUpperNavi);
 
 
 function showUpperNavi() {
-    if (upperNaviContainer.style.display === 'none'){
-        upperNaviContainer.style.display = 'flex'
+    if (upperNaviContainer.style.display === 'flex' || upperNaviContainer.style.display === 'block'){
+        upperNaviContainer.style.display = 'none'
     }else {
-        upperNaviContainer.style.display = 'none';
+        upperNaviContainer.style.display = 'flex';
     }
 }
 

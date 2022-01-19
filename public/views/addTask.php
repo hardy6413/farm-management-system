@@ -16,17 +16,7 @@
        <main>
            <?php include('upperNavi.php')?>
            <header>
-                <div class ="search-bar">
-                    <i class="fas fa-search"></i>
-                    <div>
-                        <input placeholder="search tasks " >
-                    </div>
 
-                </div>
-                <div class="create-farm">
-                    <a href="/addTask" class="navi-button">
-                        add task</a>
-                </div>
            </header>
            <section class="create-farm-form">
             <form action="addTask" method="POST" ENCTYPE="multipart/form-data" name="standard-form">
