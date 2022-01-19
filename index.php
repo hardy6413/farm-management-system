@@ -20,8 +20,8 @@ Router::get('profileOverview', 'WorkersController');
 Router::get('farmsList', 'FarmController');
 Router::post('search', 'FarmController');
 Router::post('logout','SecurityController');
-Router::get('createAccount','WorkersController');
-Router::post('signUp','WorkersController');
+Router::get('createAccount','SecurityController');
+Router::post('signUp','SecurityController');
 Router::post('joinFarm', 'FarmController');
 Router::get('createAction','FieldActionController');
 

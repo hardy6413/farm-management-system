@@ -63,6 +63,28 @@ class SecurityController extends AppController
         return $this->render('farmsList', ['farms' => $farms]);
     }
 
+    public function createAccount(){
+        return $this->render('createAccount');
+    }
+
+    public function signUp(){
+        if ($this->isPost() && $this->emailValidation($_POST['email'])){
+            if ($this->checkIfInputIsEmpty($this->messages)){
+                $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
+                $personalData = new PersonalData($_POST['name'],$_POST['lastname'],$address,false);
+                $newUserAccount = new UserAccount($_POST['email'],$_POST['password']);
+                $this->personalDataRepository->createAccount($address,$personalData,$newUserAccount);
+                return $this->render('login');
+            }else{
+                return $this->render('createAccount', ['messages' => $this->messages]);
+            }
+        }
+        else{
+            return $this->render('createAccount', ['messages' => $this->messages]);
+        }
+
+    }
+
     public function logout(){
         if (isset($_COOKIE[$this->cookieName])) {
             setcookie($this->cookieName, '', time() - (86400 * 30), "/");
@@ -71,4 +93,16 @@ class SecurityController extends AppController
         session_destroy();
         return $this->render('login');
     }
+
+    private function emailValidation($email): bool
+    {
+        $exists = $this->userAccountRepository->getUserAccount($email);
+        if ($exists === null){
+            return true;
+        }else{
+            $this->messages[] = 'Email already in use';
+            return false;
+        }
+    }
+
 }

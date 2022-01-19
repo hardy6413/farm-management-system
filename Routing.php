@@ -34,9 +34,10 @@ class Router {
             session_start();
         }
 
-        if ((!isset($_COOKIE['user']) || !isset($_SESSION['logged_in_user_account_id'])
+        if ((!isset($_COOKIE['user'])
+                || !isset($_SESSION['logged_in_user_account_id'])
                 || !isset($_SESSION['logged_in_personal_data_id']))
-            && ( $action !== 'signUp' && $action !== 'login')){
+            && ( $action !== 'createAccount' && $action !== 'login' && $action !== 'signUp')){
             self::$controller = self::$routes['login'];
             $action = 'login';
         }else{
@@ -54,4 +55,5 @@ class Router {
 
         $object->$action($id);
     }
+
 }
