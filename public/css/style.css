@@ -161,7 +161,7 @@ li {
 main {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
 }
 
 header {
@@ -255,11 +255,11 @@ h2{
     text-overflow: ellipsis;
 }
 
-section.create-farm-form{
+.create-farm-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 80%;
+    height: 90%;
     padding: 1em;
     overflow: auto;
     
@@ -269,12 +269,12 @@ section.create-farm-form{
     display: flex;
     flex-direction: column;
     background: #D0E8D1 0% 0% no-repeat padding-box;
-    width: 80%;
+    width: 100%;
     justify-content: center;
     align-content: center;
     align-items: center;
     border-radius: 1.5em;
-    height: 80%;
+    height: 95%;
 }
 
 .create-farm-form > form > select{
@@ -651,7 +651,8 @@ select > option {
         flex-direction: row;
     }
     main{
-        width: 80vw;
+        width: 90vw;
+        overflow: scroll;
     }
     .left-navi-button, .logout-button{
         font-size: 2vmax;
@@ -665,4 +666,16 @@ select > option {
     .base-container{
         flex-direction: column;
     }
+
+    section > form > input,textarea {
+        font-size: 3vmax;
+    }
+
+    .create-farm-form > form > div > *{
+        font-size: 3vmax;
+    }
+    .create-farm-form > form > div > input{
+        transform: scale(3);
+    }
+
 }

@@ -187,7 +187,7 @@ li>div{
 .workers-list{
     display: flex;
     justify-content: space-around;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
 }
 
@@ -408,11 +408,12 @@ li>div{
         overflow: scroll;
         justify-content: flex-start;
     }
-    .picture-description{
+    .picture-description, .description{
         font-size: 2vmax;
     }
     .workers-list{
         justify-content: flex-start;
+        flex-wrap: nowrap;
     }
     .farm-navi{
         flex-direction: column;
@@ -427,6 +428,71 @@ li>div{
         width: calc(70% - 100px);
         border-radius: 10em;
     }
+
+    .farms-background{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3em;
+    }
+
+    .profile-picture{
+        height: 40%;
+        width: 100%;
+    }
+    .farm-picture-container{
+        height: 60%;
+        width: 100%;
+    }
+    .farm-picture-container > div{
+        height: 30%;
+    }
+
+    #farmhouse {
+        height: 70%;
+
+    }
+
+    .description{
+        margin-bottom: 0;
+        line-height: 1em;
+    }
+
+    .fields-list{
+        flex-wrap: nowrap;
+        height: 100%;
+        overflow: scroll;
+    }
+
+    .fields-list-item{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .field-picture{
+        height: 700px;
+        width: 100%;
+    }
+    .field-description-container{
+        width: 100%;
+        height: auto;
+    }
+
+    .field-info, .field-description-container > a{
+        font-size: 3.5vmax;
+    }
+
+    .delete-icon{
+        margin-left: 0;
+        align-self: flex-start;
+        margin-top: 0;
+    }
+    #delete-field{
+        font-size: 7vmax;
+    }
+
+
 
 }
 

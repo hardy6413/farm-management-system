@@ -5,6 +5,7 @@
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="/./public/js/action.js" defer></script>
+    <script type="text/javascript" src="/./public/js/NavigationDisplaying.js" defer></script>
     <title>create action</title>
 </head>
 

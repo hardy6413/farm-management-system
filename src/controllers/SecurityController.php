@@ -64,12 +64,11 @@ class SecurityController extends AppController
     }
 
     public function logout(){
-        //todo logowanie i wylogowywanie  czy sesja jest aktywna
         if (isset($_COOKIE[$this->cookieName])) {
             setcookie($this->cookieName, '', time() - (86400 * 30), "/");
-            session_unset();
-            session_destroy();
-            return $this->render('login');
-        }//todo else
+        }
+        session_unset();
+        session_destroy();
+        return $this->render('login');
     }
 }

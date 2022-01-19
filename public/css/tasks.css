@@ -130,3 +130,25 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+@media only screen and (max-device-width: 780px) {
+    #completed{
+        font-size: 2vmax;
+        width: 25%;
+    }
+    .task-button{
+        font-size: 3vmax;
+    }
+
+    .checkmark{
+        height: 50px;
+        width: 50px;
+        border: 7px solid #178819
+    }
+    .task-list-item .checkmark:after {
+        width: 18px;
+        height: 36px;
+        border-width: 0 8px 8px 0;
+    }
+
+}
