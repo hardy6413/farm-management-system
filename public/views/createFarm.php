@@ -13,17 +13,7 @@
         <?php include('leftNavi.php')?>
        <main>
            <header>
-                <div class ="search-bar">
-                    <i class="fas fa-search"></i>
-                    <form>
-                        <input placeholder="search farm " >
-                    </form>
 
-                </div>
-               <div class="create-farm">
-                   <i class="fas fa-plus"></i>
-                   <a class="create-farm-button" href="/createFarm"  > create farm </a>
-               </div>
            </header>
            <section class="create-farm-form">
             <form action="createFarm" method="POST" ENCTYPE="multipart/form-data" name="standard-form">
