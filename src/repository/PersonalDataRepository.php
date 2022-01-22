@@ -94,30 +94,4 @@ class PersonalDataRepository extends Repository
         $updateOwner->execute();
     }
 
-    private function findWorkersByFarmId($farm) //todo to tak naprawde chyba bez sensu bo
-        // i tak zawsze bede uzywal findworkersfromthesamefarm o to spytac
-    {
-        $stmt = $this->database->connect()->prepare('
-                SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number
-                FROM personal_data pd, farm fa, address a
-                WHERE pd.farm_id = fa.id and fa.id =:id and a.id = pd.address_id
-            ');
-        $stmt->bindParam(':id', $farm['id'], PDO::PARAM_INT);
-        $stmt->execute();
-        $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if ($workers == false){
-            return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
-        }
-
-        $foundWorkers=[];
-        foreach ($workers as $worker) {
-            $foundWorkers[] = new PersonalData($worker['first_name'],$worker['last_name'],
-                new Address($worker['street'], $worker['city'], $worker['postal_code'], $worker['building_number'])
-                ,$worker['is_owner']);
-        }
-        return $foundWorkers;
-
-    }
-
 }

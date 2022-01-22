@@ -77,7 +77,7 @@ class SecurityController extends AppController
 
                     $personalData = new PersonalData($_POST['name'],$_POST['lastname'],$address,false);
 
-                    $newUserAccount = new UserAccount($_POST['email'],$_POST['password']);
+                    $newUserAccount = new UserAccount($_POST['email'],$hashedPassword);
 
                     $this->personalDataRepository->createAccount($address,$personalData,$newUserAccount);
 
@@ -116,9 +116,9 @@ class SecurityController extends AppController
     {
         if (strlen($password) < 4) {
             $this->messages[] = 'password is too short';
-            return true;
-        }else{
             return false;
+        }else{
+            return true;
         }
     }
 

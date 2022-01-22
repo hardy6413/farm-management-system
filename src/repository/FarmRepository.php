@@ -135,7 +135,7 @@ class FarmRepository extends Repository
         return $foundFields;
     }
 
-    private function findWorkersByFarmId($farm)
+    private function findWorkersByFarmId($farm): ?array
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number
