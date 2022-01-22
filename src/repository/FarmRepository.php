@@ -14,7 +14,7 @@ class FarmRepository extends Repository
             select  f.id,f.name, f.image, f.token, a.street, a.city, a.postal_code, a.building_number
             from farm f, address a
             where f.address_id = a.id and f.id =:id
-            ');//todo czy z selecta usera  jakos wziąć?
+            ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -26,21 +26,21 @@ class FarmRepository extends Repository
         $foundFields = $this->findFieldsByFarm($farm);
         $foundWorkers = $this->findWorkersByFarmId($farm);
 
-        $foundFarm = new Farm($farm['name'], $farm['image'], $farm['token'],
+        $foundFarm = new Farm($farm['id'], $farm['name'], $farm['image'], $farm['token'],
         new Address($farm['street'],$farm['city'], $farm['postal_code'], $farm['building_number']),
         $foundFields, $foundWorkers);
         $foundFarm->setId($farm['id']);
         return $foundFarm;
     }
 
-    public function createFarm(Farm $farm, int $personalDataId): void
+    public function createFarm(Farm $farm, int $personalDataId): bool
     {
         $stmt = $this->database->connect()->prepare('
         WITH identity AS (INSERT INTO address (street, city, postal_code, building_number)
         VALUES (?, ?, ?, ?) returning id) 
         INSERT INTO farm (name ,token, image, address_id)
         VALUES  (?, ?, ?, (SELECT id from identity)) returning id
-        ');//todo returning id? chyba zapomnialem usunac
+        ');
 
         $stmt->execute([
             $farm->getFarmAddress()->getStreet(),
@@ -53,6 +53,8 @@ class FarmRepository extends Repository
         ]);
         $farmId = $stmt->fetchColumn();
 
+        $_SESSION['logged_in_user_farm_id'] = $farmId;
+
         $updateOwner = $this->database->connect()->prepare('
         UPDATE personal_data
         SET farm_id =:f_id , is_owner = true
@@ -60,7 +62,13 @@ class FarmRepository extends Repository
         ');
         $updateOwner->bindParam(':f_id', $farmId, PDO::PARAM_INT);
         $updateOwner->bindParam(':u_id', $personalDataId, PDO::PARAM_INT);
-        $updateOwner->execute();
+
+        $updateRes = $updateOwner->execute();
+        if ($updateRes === true && $farmId !== null){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
@@ -81,6 +89,7 @@ class FarmRepository extends Repository
             $foundWorkers = $this->findWorkersByFarmId($farm);
 
             $queriedFarm = new Farm(
+                $farm['id'],
                 $farm['name'],
                 $farm['image'],
                 $farm['token'],
@@ -146,7 +155,7 @@ class FarmRepository extends Repository
         $stmt->execute();
         $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($workers == false){
+        if ($workers === false){
             return null; //todo nie jest odpowiedni należałoby wyrzucic wyjątek
         }
 
@@ -160,7 +169,7 @@ class FarmRepository extends Repository
 
     }
 
-    public function getFarmByCode($code)
+    public function getFarmIdByCode($code)
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT * FROM public.farm WHERE token =:id

@@ -364,9 +364,10 @@ select > option {
     border-radius: 20px;
 }
 
-.farms-item-container>div:hover > #join-button{
+.farms-item-container>div:hover > form > #join-button{
     display: block;
     align-self: center;
+    width: 75%;
 }
 .farms-item-container>div:hover > form{
     display: block;
@@ -380,7 +381,7 @@ select > option {
     display: none;
 }
 
-#joinFarmForm > input{
+#joinFarmForm > label > input{
     border: none;
     border-bottom: 1px solid gray;
     margin: 1em;

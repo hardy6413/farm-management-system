@@ -45,9 +45,11 @@
                         <p class="farm-data-info" id="desc"><?= $farm->getName(); ?></p>
                         <div class="farm-data-info" id="desc"><?= $farm->getFarmAddress()->__toString(); ?></div>
                         <form id="joinFarmForm" action="joinFarm" method="POST">
-                            <input name="code" type="text" placeholder="enter code"> //todo zapytac o kod
+                            <label for="<?= $farm->getId(); ?>">
+                                <input name="code" type="text" placeholder="enter code">
+                            </label>
+                            <button id="join-button"  type="submit">join farm</button>
                         </form>
-                        <button id="join-button" form="joinFarmForm" type="submit">join farm</button>
                     </div>
                 </li>
                     <?php endforeach; ?>

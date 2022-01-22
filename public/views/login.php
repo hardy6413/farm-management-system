@@ -22,7 +22,7 @@
                         ?>
                     </div>
                     <input name=" email " type="text " placeholder="email@email.com ">
-                    <input name="password " type="text " placeholder="password ">
+                    <input name="password " type="password" placeholder="password ">
                     <div class="login-buttons-container">
                         <button type="submit" class="sign-up-button">log in</button>
                         <a href="/createAccount" class="sign-up-button">sign up</a>

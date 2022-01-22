@@ -29,32 +29,37 @@ class FarmController extends AppController
             && $this->validateImage($_FILES['file'],
                 self::MAX_FILE_SIZE,
                 self::SUPPORTED_TYPES,
-                $this->messages))
+                $this->messages)
+            && $this->checkIfInputIsEmpty($this->messages)
+            && $this->checkIfUserIsAlreadyOwner())
         {
-            if ($this->checkIfInputIsEmpty($this->messages) && $this->checkIfUserIsAlreadyOwner()){
-                move_uploaded_file($_FILES['file']['tmp_name'],
-                    dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
+            move_uploaded_file($_FILES['file']['tmp_name'],
+                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']);
+
+            $farmAddress = new Address($_POST['street'],
+                $_POST['city'],
+                $_POST['postal-code'],
+                $_POST['building-number']);
+            $farm = new Farm($_POST['name'],
+                $_FILES['file']['name'],
+                $this->generateFarmToken()
+                ,$farmAddress,
+                array(),
+                array());
+            $res = $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
 
 
-                $farmAddress = new Address($_POST['street'],
-                    $_POST['city'],
-                    $_POST['postal-code'],
-                    $_POST['building-number']);
-
-                $farm = new Farm($_POST['name'],
-                    $_FILES['file']['name'],
-                    $this->generateFarmToken()
-                    ,$farmAddress,
-                    array(),
-                    array());
-
-                $this->farmRepository->createFarm($farm,$_SESSION['logged_in_personal_data_id'] );
-
-                return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
-                    ,'messages' => $this->messages]);
+            if ($res === true){// udalo sie dodac
+                $url = "http://$_SERVER[HTTP_HOST]";
+                header("Location: {$url}/profileOverview");
+            }else{
+                $this->messages[] = 'Something went wrong, try again';
+                return $this->render('createFarm', ['messages' => $this->messages]);
             }
+
+        }else{
+            return $this->render('createFarm', ['messages' => $this->messages]);
         }
-        return $this->render('createFarm', ['messages' => $this->messages]);
     }
 
     public function search(){
@@ -79,7 +84,7 @@ class FarmController extends AppController
 
     public function joinFarm(){
         if ($this->isPost()){
-            $farmId = $this->farmRepository->getFarmByCode($_POST['code']);
+            $farmId = $this->farmRepository->getFarmIdByCode($_POST['code']);
             if ($farmId == null){
                 $this->messages[] = 'wrong farm code!';
                 return $this->render('farmsList', ['farms' => $this->farmRepository->getFarms()
@@ -88,7 +93,8 @@ class FarmController extends AppController
             $_SESSION['logged_in_user_farm_id'] = $farmId;
             $this->personalDataRepository->joinFarm($farmId,$_SESSION['logged_in_personal_data_id']);
 
-            return $this->render('profileOverview');
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/profileOverview");
         }
         else{
             $this->messages[] = 'something went wrong';

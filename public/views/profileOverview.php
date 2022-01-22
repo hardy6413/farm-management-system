@@ -19,7 +19,10 @@
                    <img src="public/uploads/<?= $farm->getImage(); ?>"  id="farmhouse">
                    <div>
                        <h2 class="description"><?= $farm->getName(); ?> </h2>
-                       <p class="description"> Owner <?= $farm->findOwner()->__toString(); ?></p>
+                       <p class="description"> Owner <?= $farm->findOwner()->__toString(); ?>
+                           <? if ($worker->isOwner() === true) :  ?>
+                           Code : <?=$farm->getToken() ?>
+                           <?php endif; ?>
                    </div>
                 </div>
                 <div class="profile-picture">
