@@ -24,43 +24,40 @@ class SecurityController extends AppController
 
 
     public function login(){
-        if (!$this->isPost()){
-            if (!isset($_COOKIE['user'])){
-                $this->messages[] = 'session expired';
+            if ($this->isPost() && $this->checkIfInputIsEmpty($this->messages)){
+            $email = $_POST['email_'];
+            $password = $_POST['password_'];
+            $userAccount = $this->userAccountRepository->logIn($email);
+
+            if (!$userAccount) {
+                return $this->render('login',['messages' => ['User not found']] );
             }
-            return $this->render('login');
+
+            if ($userAccount->getEmail() !== $email){
+                return $this->render('login', ['messages' => ['User with this email does not exist!']] );
+            }
+
+            if (!password_verify($password, $userAccount->getPassword())){
+                return $this->render('login', ['messages' => ['Wrong password']] );
+            }
+
+            $this->createCookie($userAccount);
+
+            if(isset($_SESSION['logged_in_user_farm_id'])){
+                $farm = $this->farmRepository->getFarm($_SESSION['logged_in_user_farm_id']);
+
+                $worker = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
+
+                return $this->render('profileOverview', ['farm' => $farm , 'worker' => $worker]);
+            }else{
+                $farms = $this->farmRepository->getFarms();
+                return $this->render('farmsList', ['farms' => $farms]);
+            }
+
+        }else{
+            return $this->render('login', ['messages' => $this->messages]);
         }
 
-        $email = $_POST['email_'];
-        $password = $_POST['password_'];
-        $userAccount = $this->userAccountRepository->logIn($email);
-
-        if (!$userAccount) {
-            return $this->render('login',['messages' => ['User not found']] );
-        }
-
-
-        if ($userAccount->getEmail() !== $email){
-            return $this->render('login', ['messages' => ['User with this email does not exist!']] );
-        }
-
-        if ($userAccount->getPassword() !== $password){
-            return $this->render('login', ['messages' => ['Wrong password']] );
-        }
-
-        $cookieValue = $userAccount->getEmail();
-        if(!isset($_COOKIE[$this->cookieName])){
-            setcookie('user',$cookieValue,time() + (86400 * 30),"/");
-        }
-        if(isset($_SESSION['logged_in_user_farm_id'])){
-            $farm = $this->farmRepository->getFarm($_SESSION['logged_in_user_farm_id']);
-            $worker = $this->personalDataRepository->findByUserAccountId($_SESSION['logged_in_user_account_id']);
-
-            return $this->render('profileOverview', ['farm' => $farm , 'worker' => $worker]);
-        }
-
-        $farms = $this->farmRepository->getFarms();
-        return $this->render('farmsList', ['farms' => $farms]);
     }
 
     public function createAccount(){
@@ -68,22 +65,33 @@ class SecurityController extends AppController
     }
 
     public function signUp(){
-        if ($this->isPost() && $this->emailValidation($_POST['email'])){
-            if ($this->checkIfInputIsEmpty($this->messages)){
-                $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
-                $personalData = new PersonalData($_POST['name'],$_POST['lastname'],$address,false);
-                $newUserAccount = new UserAccount($_POST['email'],$_POST['password']);
-                $this->personalDataRepository->createAccount($address,$personalData,$newUserAccount);
-                return $this->render('login');
+        if ($this->isPost()
+            && $this->checkIfInputIsEmpty($this->messages)
+            && $this->emailIsNotAlreadyInUse($_POST['email'])
+            && $this->validateNotHashedPassword($_POST['password'])
+        )
+        {
+                $hashedPassword = password_hash($_POST['password'],PASSWORD_BCRYPT);
+                if ($hashedPassword !== false){
+                    $address = new Address($_POST['street'],$_POST['city'],$_POST['postal-code'],$_POST['building-number']);
+
+                    $personalData = new PersonalData($_POST['name'],$_POST['lastname'],$address,false);
+
+                    $newUserAccount = new UserAccount($_POST['email'],$_POST['password']);
+
+                    $this->personalDataRepository->createAccount($address,$personalData,$newUserAccount);
+
+                    return $this->render('login');
+                }else{
+                    $this->messages[] = 'something went wrong, please try again';
+                    return $this->render('createAccount', ['messages' => $this->messages]);
+                }
+
             }else{
                 return $this->render('createAccount', ['messages' => $this->messages]);
             }
         }
-        else{
-            return $this->render('createAccount', ['messages' => $this->messages]);
-        }
 
-    }
 
     public function logout(){
         if (isset($_COOKIE[$this->cookieName])) {
@@ -94,7 +102,27 @@ class SecurityController extends AppController
         return $this->render('login');
     }
 
-    private function emailValidation($email): bool
+    private function checkIfHashIsSuccessful(){
+        $hashedPassword = password_hash($_POST['password'],PASSWORD_BCRYPT);
+        if ($hashedPassword === false){
+            $this->messages[] = 'something went wrong, please try again';
+            return false;
+        }else{
+            return $hashedPassword;
+        }
+    }
+
+    private function validateNotHashedPassword($password): bool
+    {
+        if (strlen($password) < 4) {
+            $this->messages[] = 'password is too short';
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private function emailIsNotAlreadyInUse($email): bool
     {
         $exists = $this->userAccountRepository->getUserAccount($email);
         if ($exists === null){
@@ -102,6 +130,15 @@ class SecurityController extends AppController
         }else{
             $this->messages[] = 'Email already in use';
             return false;
+        }
+    }
+
+
+    private function createCookie(UserAccount $userAccount): void
+    {
+        $cookieValue = $userAccount->getEmail();
+        if (!isset($_COOKIE[$this->cookieName])) {
+            setcookie('user', $cookieValue, time() + (86400 * 30), "/");
         }
     }
 
