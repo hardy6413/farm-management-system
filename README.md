@@ -1,45 +1,62 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+#Farm Management System
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+Farm Management System to system pomagający w zarządzaniu i organizacji pracy w gospodarstwie rolnym. W przyszłości
+aplikacja może zostać rozbudowana by wspierać również inne typy gospodarstw np. gospodarstwa specjalizujące się 
+w sadownictwie bądź hodowli zwierząt.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
 
----
+##Opis
 
-## Edit a file
+* Głównym założeniem aplikacji podczas jej tworzenia była prostota w użytkowaniu.Wymaganie to wynika z uwagi na to, że 
+w takich gospodarstwach często osoba pracująca nie ma czasu na staranne dokumentowanie wszystkich działań.Z kolei 
+dokumentowanie swoich działań jest rzeczą bardzo istotną w każdym większym gospodarstwie, pozwala kontrolować działania 
+i ułatwia podejmowanie decyzji które trzeba zaplanować wyprzedzeniem. <br>
+* Interfejs aplikacji został właśnie tak stworzony by był bardzo prosty w użyciu, przejrzysty - by nawet starsi 
+użytkownicy mogli się w niej łatwo odnaleźć.Za sprawą dosłownie paru kliknięć umożliwia dodawanie własnych akcji bądź innych działań. <br>
+* Aplikacja wymaga tak naprawde od użytkownika jedynie utworzenia konta oraz założenia własnego gospodarstwa lub 
+przyłączenie się do istniejącego gospodarstwa gdy jest się np. pracownikiem w czyimś gospodarstwie po wypełnieniu tych 
+kroków można juz korzystać z funkcjonalności aplikacji.
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
 
----
 
-## Create a file
+##Aplikacja
 
-Next, you’ll add a new file to this repository.
+![](AppScreenShots/login.png)
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+* Na stronie logowania użytkownik może się zalogować bądź  zarejestrować.
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+![](AppScreenShots/createAccountForm.png)
+* Każda strona zawierająca formularz informuje usera u wymaganiu podania danych poprzez  zaznaczanie kolejnych luk na czerwono.
 
----
+po  zarejestrowaniu się użytkownik zostaje przekierowany do penelu logowania.
+![](AppScreenShots/farmsList.png)
+po zalogowaniu  się użytkownik zostanie przekierowany by wybrać swoją farmę - gdy jest pracownikiem bądź utworzyć własną.
+<br>
+![](AppScreenShots/profileOverview.png)
+po wpisaniu poprawnego kodu do dołączenia farmy użytkownik zostanie do niej dodany i przekierowany 
+do głównego widoku swojego profilu. 
+<br> 
+teraz dzięki prostej nawigacji u góry strony oraz po lewej może w prosty sposób korzystać z kolejnych funkcjonalności aplikacji.
+<br>
+Może sprawdzić kto pracuje razem z nim na gospodarstwie klikając przycisk "workers"
+![](AppScreenShots/workers.png)
+lub przejść do panelu kontroli zadań na farmie klikając "tasks"
+![](AppScreenShots/tasks.png)
+Użytkownik może dodawać zadania, usuwać je, filtrować po nazwie.
+<br>
+Klikając przycisk "fields" użytkonik zostaje przeniesiony do strony na której wyświetlane są wszystkie pola które 
+zostały dodane przez jakiegokolwiek użytkownika należącego do wspólnego gospodarstwa.
+![](AppScreenShots/fields.png)
+Pola można filtrować po nazwie dodawać, usuwać - przycisk kosza, oraz szukać akcji podając np nazwe akcji.
 
-## Clone a repository
+Przycisk "settings" przenosi użytkownika do ustawień panujących na jego koncie
+![](AppScreenShots/settings.png)
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+Przycisk "account" przenosi użytkownika do strony w której może wykonywać działania na swoim koncie.
+![](AppScreenShots/account.png)
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+Przycisk "myFarm" włącza bądź wyłącza widok górnej nawigacji.
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+Strona z poprzedniego zdjęcia po przyciśnięciu "myFarm"
+![](AppScreenShots/myFarm.png)
