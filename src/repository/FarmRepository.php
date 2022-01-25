@@ -24,12 +24,7 @@ class FarmRepository extends Repository
         if ($farm == false) {
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
-        $foundFields = $this->findFieldsByFarm($farm);
-        $foundWorkers = $this->findWorkersByFarmId($farm);
-
-        $foundFarm = new Farm($farm['id'], $farm['name'], $farm['image'], $farm['token'],
-        new Address($farm['street'],$farm['city'], $farm['postal_code'], $farm['building_number']),
-        $foundFields, $foundWorkers);
+        $foundFarm = $this->createFarmOnFoundObjects($farm);
         $foundFarm->setId($farm['id']);
         return $foundFarm;
     }
@@ -73,35 +68,22 @@ class FarmRepository extends Repository
 
     }
 
-    public function getFarms()
+    public function getFarms(): array
     {
-        $result = [];
+        $foundFarms = [];
 
         $stmt = $this->database->connect()->prepare('
-            select  f.id,f.name, f.image, f.token, a.street, a.city, a.postal_code, a.building_number
-            from farm f
-            inner join address a on a.id = f.address_id
+            SELECT * FROM public.display_farms
         ');
         $stmt->execute();
         $farms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($farms as $farm) {
-            $foundFields = $this->findFieldsByFarm($farm);
-            $foundWorkers = $this->findWorkersByFarmId($farm);
-
-            $queriedFarm = new Farm(
-                $farm['id'],
-                $farm['name'],
-                $farm['image'],
-                $farm['token'],
-                new Address($farm['street'], $farm['city'], $farm['postal_code'], $farm['building_number']),
-                $foundFields,
-                $foundWorkers
-            );
-             $result[] = $queriedFarm;
+            $queriedFarm = $this->createFarmOnFoundObjects($farm);
+            $foundFarms[] = $queriedFarm;
 
         }
-        return $result;
+        return $foundFarms;
     }
 
 
@@ -187,5 +169,20 @@ class FarmRepository extends Repository
             return null; // nie jest odpowiedni należałoby wyrzucic wyjątek
         }
         return $farm['id'];
+    }
+
+    /**
+     * @param $farm
+     * @return Farm
+     */
+    private function createFarmOnFoundObjects($farm): Farm
+    {
+        $foundFields = $this->findFieldsByFarm($farm);
+        $foundWorkers = $this->findWorkersByFarmId($farm);
+
+        $foundFarm = new Farm($farm['id'], $farm['name'], $farm['image'], $farm['token'],
+            new Address($farm['street'], $farm['city'], $farm['postal_code'], $farm['building_number']),
+            $foundFields, $foundWorkers);
+        return $foundFarm;
     }
 }
