@@ -25,7 +25,6 @@ search.addEventListener("keyup", function (event) {
 
 function loadFields(fields) {
     fields.forEach(field => {
-        console.log(field);
         createField(field);
     });
 }

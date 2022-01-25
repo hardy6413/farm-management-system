@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/tasks.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/public/js/NavigationDisplaying.js" defer></script>
+    <script type="text/javascript" src="/public/js/actionDescription.js" defer></script>
     <title>Field</title>
 </head>
 
@@ -19,18 +20,11 @@
             <ul class="farm-navi">
                 <li class="field-navi-item">
                     <div class="search-field">
-                        <form>
+                        <div>
                             <input placeholder="search action " >
-                        </form>
+                        </div>
                     </div>
 
-                </li>
-                <li class="field-navi-item">
-                    <div class="search-field">
-                        <form>
-                            <input placeholder="search field " >
-                        </form>
-                    </div>
                 </li>
                 <li class="field-navi-item">
                  <a href="#" class="navi-button">
@@ -81,9 +75,9 @@
                         <th class="table-head" id="tick-completed">completed</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="action-rows">
                     <?php foreach ($field->getFieldActions() as $fieldAction): ?>
-                    <tr class="action-row">
+                    <tr class="action-row" id="<?= $fieldAction->getId(); ?>">
                         <td class="record" id="date">
                             <a href="#" class="action-button">
                                 <?= $fieldAction->getCreatedAt(); ?>
@@ -119,7 +113,7 @@
                         </a>
                     </div>
                     <div class="action-description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
                     </div>
 
 

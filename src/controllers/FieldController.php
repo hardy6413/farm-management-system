@@ -68,8 +68,7 @@ class FieldController extends AppController
 
             header('Content-type: application/json');
             http_response_code(200);
-            $w = $this->fieldRepository->getFarmsFieldsByName($decoded['search']);
-            $test = json_encode($this->fieldRepository->getFarmsFieldsByName($decoded['search']));
+
             echo json_encode($this->fieldRepository->getFarmsFieldsByName($decoded['search']));
         }
     }

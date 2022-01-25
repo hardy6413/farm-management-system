@@ -20,6 +20,7 @@ Router::get('profileOverview', 'WorkersController');
 Router::get('farmsList', 'FarmController');
 Router::post('searchFarms', 'FarmController');
 Router::post('searchFields', 'FieldController');
+Router::post('fieldDetailedInfo', 'FieldActionController');
 Router::post('logout','SecurityController');
 Router::get('createAccount','SecurityController');
 Router::post('signUp','SecurityController');

@@ -12,7 +12,7 @@ function arePassswordsSame(password, confirmedPassword){
 }
 
 function markValidation(element, condition) {
-    !condition ? element.classList.add('no-valid') : element.classList.remove('no-valid');
+    condition ? element.classList.add('no-valid') : element.classList.remove('no-valid');
 }
 
 function validateEmail() {

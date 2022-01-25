@@ -19,7 +19,9 @@ function markValidation(element, condition) {
 function  validateEveryInput(){
     setTimeout(function (){
             for (let i = 0; i < elements.length; i++) {
-                markValidation(elements[i],emptyInputCondition(elements[i].value));
+                if (elements[i].type !== "password" && elements[i].name !== "email"){
+                    markValidation(elements[i],emptyInputCondition(elements[i].value));
+                }
             }
         }
         , 1000);

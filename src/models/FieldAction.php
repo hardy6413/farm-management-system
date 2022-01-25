@@ -7,11 +7,10 @@ class FieldAction extends BaseClass{
     private $description;
     private $actionName;
     private $actionParams = [];
-    //todo zrobic parsa na created at
 
-
-    public function __construct($person, $createdAt, $description, $actionName,  $actionParams,  $isCompleted = false)
+    public function __construct($id,$person, $createdAt, $description, $actionName,  $actionParams,  $isCompleted = false)
     {
+        $this->id = $id;
         $this->person = $person;
         $this->createdAt = $createdAt;
         $this->isCompleted = $isCompleted;

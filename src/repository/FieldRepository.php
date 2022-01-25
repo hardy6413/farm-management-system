@@ -2,6 +2,7 @@
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Field.php';
 require_once __DIR__.'/../models/ActionParam.php';
+
 class FieldRepository extends Repository
 {
     public function findFieldsByFarm(): ?array
@@ -88,11 +89,15 @@ class FieldRepository extends Repository
 
         $foundFieldActions = [];
 
+        $fieldActionRepository  = new FieldActionRepository();
+
 
         if (!empty($fieldActions)){
             foreach ($fieldActions as $fieldAction) {
-                $actionParams = $this->findActionParamsByFieldActionId($fieldAction['id']);
+                $fieldAction['created_at'] = date('d-m-Y', strtotime($fieldAction['created_at']));
+                $actionParams = $fieldActionRepository->findActionParamsByFieldActionId($fieldAction['id']);
                 $foundFieldActions[] = new FieldAction(
+                    $fieldAction['id'],
                     new PersonalData($fieldAction['first_name'], $fieldAction['last_name'],
                         new Address($fieldAction['street'],$fieldAction['city'], $fieldAction['postal_code'],
                             $fieldAction['building_number']),$fieldAction['is_owner']),
@@ -105,28 +110,6 @@ class FieldRepository extends Repository
 
     }
 
-    public function findActionParamsByFieldActionId($fieldActionId): ?array
-    {
-        $stmt = $this->database->connect()->prepare('
-                SELECT pa.value, pa.param_name
-                FROM param_value pa
-                inner join field_action fa on fa.id = pa.field_action_id
-                WHERE fa.id=:id
-            ');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $actionParams = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($actionParams === false){
-            return null;
-        }
-
-        $foundActionParams = [];
-
-        foreach ($actionParams as $actionParam) {
-            $foundActionParams[] = new ActionParam($actionParam['param_name'], $actionParam['value']);
-        }
-        return $foundActionParams;
-    }
 
     public function getFarmsFieldsByName(string $searchString){
         if (isset($_SESSION['logged_in_user_farm_id'])){
