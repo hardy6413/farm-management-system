@@ -6,13 +6,11 @@ class FieldRepository extends Repository
 {
     public function findFieldsByFarm(): ?array
     {
-        if (!isset($_SESSION['logged_in_user_farm_id'])){ //todo o to spytac czy nie lepiej w kontrolerze?
-            return null;
-        }else {
             $stmt = $this->database->connect()->prepare('
                 SELECT f.id, f.name, f.description, f.area, f.extra_payment, f.block_number, f.is_property, f.image
-                FROM field f, farm fa
-                WHERE f.farm_id = fa.id and fa.id=:id
+                FROM field f
+                inner join farm fa on fa.id = f.farm_id
+                WHERE fa.id=:id
             ');
             $stmt->bindParam(':id', $_SESSION['logged_in_user_farm_id'], PDO::PARAM_INT);
             $stmt->execute();
@@ -25,9 +23,8 @@ class FieldRepository extends Repository
                     , $field['id']);
             }
             return $foundFields;
-        }
-
     }
+
 
     public function createField(Field $field, $logged_in_user_farm_id)
     {
@@ -76,9 +73,11 @@ class FieldRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT fa.id, fa.is_completed, fa.created_at, fa.description, fa.action_name, fa.is_completed,
-                       pd.first_name, pd.last_name, pd.is_owner, ad.street, ad.city, ad.postal_code, ad.building_number
-                FROM field_action fa, personal_data pd, address ad
-                WHERE fa.field_id=:id and pd.id = fa.personal_data_id and pd.address_id = ad.id
+                pd.first_name, pd.last_name, pd.is_owner, ad.street, ad.city, ad.postal_code, ad.building_number
+                FROM field_action fa
+                inner join personal_data pd on pd.id = fa.personal_data_id
+                inner join address ad on ad.id = pd.address_id
+                WHERE fa.field_id=:id
             ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -110,8 +109,9 @@ class FieldRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT pa.value, pa.param_name
-                FROM param_value pa, field_action fa
-                WHERE fa.id=:id and fa.id = pa.field_action_id
+                FROM param_value pa
+                inner join field_action fa on fa.id = pa.field_action_id
+                WHERE fa.id=:id
             ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

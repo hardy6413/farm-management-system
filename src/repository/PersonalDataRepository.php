@@ -6,8 +6,10 @@ class PersonalDataRepository extends Repository
     public function findByUserAccountId(int $id): ?PersonalData{
         $stmt = $this->database->connect()->prepare('
                 SELECT pd.id, pd.first_name, pd.last_name, pd.is_owner, ad.street, ad.city, ad.postal_code, ad.building_number
-                from personal_data pd, address ad, user_account ac
-                WHERE pd.address_id = ad.id and pd.id=ac.personal_data_id and ac.id=:id
+                from personal_data pd
+                inner join address ad on ad.id = pd.address_id
+                inner join user_account ua on pd.id = ua.personal_data_id
+                WHERE ua.id=:id
             ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -32,8 +34,10 @@ class PersonalDataRepository extends Repository
         }else{
             $stmt = $this->database->connect()->prepare('
                 SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number
-                FROM personal_data pd, farm fa, address a
-                WHERE pd.farm_id = fa.id and fa.id =:id and a.id = pd.address_id
+                FROM personal_data pd
+                inner join address a on a.id = pd.address_id
+                inner join farm fa on fa.id = pd.farm_id
+                WHERE fa.id =:id
             ');
             $stmt->bindParam(':id', $_SESSION['logged_in_user_farm_id'], PDO::PARAM_INT);
             $stmt->execute();

@@ -18,6 +18,10 @@ class FieldController extends AppController
     }
 
     public function fields(){
+        if (!isset($_SESSION['logged_in_user_farm_id'])){
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
+        }
         $fields = $this->fieldRepository->findFieldsByFarm();
         $this->render("fields", ['fields' => $fields]);
     }

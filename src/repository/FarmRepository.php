@@ -12,8 +12,9 @@ class FarmRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare('
             select  f.id,f.name, f.image, f.token, a.street, a.city, a.postal_code, a.building_number
-            from farm f, address a
-            where f.address_id = a.id and f.id =:id
+            from farm f
+            inner join address a on a.id = f.address_id
+            where f.id =:id
             ');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -78,8 +79,8 @@ class FarmRepository extends Repository
 
         $stmt = $this->database->connect()->prepare('
             select  f.id,f.name, f.image, f.token, a.street, a.city, a.postal_code, a.building_number
-            from farm f, address a
-            where f.address_id = a.id
+            from farm f
+            inner join address a on a.id = f.address_id
         ');
         $stmt->execute();
         $farms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -127,8 +128,9 @@ class FarmRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT f.id, f.name, f.description, f.area, f.extra_payment, f.block_number, f.is_property, f.image
-                FROM field f, farm fa
-                WHERE f.farm_id = fa.id and fa.id=:id
+                FROM field f
+                inner join farm fa on fa.id = f.farm_id
+                WHERE fa.id=:id
             ');
         $stmt->bindParam(':id', $farm['id'], PDO::PARAM_INT);
         $stmt->execute();
@@ -148,8 +150,10 @@ class FarmRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare('
                 SELECT pd.first_name, pd.last_name, pd.is_owner, a.street, a.city, a.postal_code, a.building_number
-                FROM personal_data pd, farm fa, address a
-                WHERE pd.farm_id = fa.id and fa.id =:id and a.id = pd.address_id
+                FROM personal_data pd
+                inner join address a on a.id = pd.address_id
+                inner join farm fa on fa.id = pd.farm_id
+                WHERE fa.id =:id
             ');
         $stmt->bindParam(':id', $farm['id'], PDO::PARAM_INT);
         $stmt->execute();
