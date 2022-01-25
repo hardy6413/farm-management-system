@@ -58,4 +58,19 @@ class FieldController extends AppController
         $field = $this->fieldRepository->findFieldById($id);
         return $this->render('fieldOverview',['field' => $field]);
     }
+
+    public function searchFields(){
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json"){
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+            $w = $this->fieldRepository->getFarmsFieldsByName($decoded['search']);
+            $test = json_encode($this->fieldRepository->getFarmsFieldsByName($decoded['search']));
+            echo json_encode($this->fieldRepository->getFarmsFieldsByName($decoded['search']));
+        }
+    }
 }

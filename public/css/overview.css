@@ -222,7 +222,7 @@ li>div{
     
 }
 
-.field-navi-item> .search-field > form>input{
+.field-navi-item> .search-field > div>input{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 1em;
     letter-spacing: 0.7px;
@@ -239,7 +239,7 @@ li>div{
     
     
 }
-.field-navi-item> .search-field >form{
+.field-navi-item> .search-field >div{
     width: 100%;
     border: 0;
     margin-left: 0.3em;

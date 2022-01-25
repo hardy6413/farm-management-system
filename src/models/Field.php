@@ -8,7 +8,7 @@ class Field extends BaseClass{
     private  $blockNumber;
     private  $isProperty;
     private  $image;
-    private  $fieldActions = []; //todo
+    private  $fieldActions = [];
 
 
 

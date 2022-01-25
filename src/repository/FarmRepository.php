@@ -100,9 +100,7 @@ class FarmRepository extends Repository
         $stmt->bindParam(':search', $searchString,PDO::PARAM_STR);
         $stmt->execute();
 
-        $farm = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $farm;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -171,10 +169,7 @@ class FarmRepository extends Repository
         return $farm['id'];
     }
 
-    /**
-     * @param $farm
-     * @return Farm
-     */
+
     private function createFarmOnFoundObjects($farm): Farm
     {
         $foundFields = $this->findFieldsByFarm($farm);

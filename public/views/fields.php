@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/overview.css">
     <script src="https://kit.fontawesome.com/a781b65e9b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/public/js/NavigationDisplaying.js" defer></script>
+    <script type="text/javascript" src="/./public/js/searchFields.js" defer></script>
     <title>Fields</title>
 </head>
 
@@ -17,17 +18,17 @@
             <ul class="farm-navi">
                 <li class="field-navi-item">
                     <div class="search-field">
-                        <form>
-                            <input placeholder="search action " >
-                        </form>
+                        <div>
+                            <input placeholder="search action" >
+                        </div>
                     </div>
                     
                 </li>
                 <li class="field-navi-item">
                     <div class="search-field">
-                        <form>
-                            <input placeholder="search field " >
-                        </form>
+                        <div>
+                            <input placeholder="search field" >
+                        </div>
                     </div>
                 </li>
                 <li class="field-navi-item">
@@ -63,3 +64,25 @@
        </main>
     </div>
 </body>
+
+
+<template id="field-template">
+    <li class="fields-list-item">
+        <img src="" class="field-picture">
+        <div class="field-description-container">
+            <h2 class="field-info">
+                field info
+            </h2>
+            <a href="#" class="field-options">
+                Inspect on map
+            </a>
+            <a href="" class="field-options" id="field-overview-id">
+                Past actions and notes
+            </a>
+        </div>
+        <a href="#" class="delete-icon">
+            <i class="fas fa-trash"  id="delete-field"></i>
+        </a>
+
+    </li>
+</template>

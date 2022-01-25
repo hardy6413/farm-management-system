@@ -62,7 +62,7 @@ class FarmController extends AppController
         }
     }
 
-    public function search(){
+    public function searchFarms(){
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if ($contentType === "application/json"){

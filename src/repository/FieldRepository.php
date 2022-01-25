@@ -128,4 +128,26 @@ class FieldRepository extends Repository
         return $foundActionParams;
     }
 
+    public function getFarmsFieldsByName(string $searchString){
+        if (isset($_SESSION['logged_in_user_farm_id'])){
+            $searchString = '%'.strtolower($searchString).'%';
+
+            $stmt = $this->database->connect()->prepare('
+            SELECT f.id, f.name, f.area, f.block_number, f.is_property, f.extra_payment, f.image, f.description
+            FROM field f
+            WHERE LOWER(f.name) LIKE :search and f.farm_id =:id
+        ');
+            $stmt->bindParam(':search', $searchString,PDO::PARAM_STR);
+            $stmt->bindParam(':id', $_SESSION['logged_in_user_farm_id'],PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return null;
+        }
+
+    }
+
+
+
 }
