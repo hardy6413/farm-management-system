@@ -12,7 +12,7 @@ class Farm extends BaseClass{
     private $workers = [];
 
 
-    public function __construct($id,$name, $image, $token,  $farmAddress, $fields, $workers)
+    public function __construct($name, $image, $token,  $farmAddress, $fields, $workers,$id = null)
     {
         $this->name = $name;
         $this->image = $image;

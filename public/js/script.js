@@ -4,11 +4,11 @@ const emailInput = form.querySelector('input[name="email"]');
 const confirmedPasswordInput = form.querySelector('input[name="confirmedPassword"]');
 
 function isEmail(email){
-    return /\S+@\S+\.\S+/.test(email)
+    return !(/\S+@\S+\.\S+/.test(email))
 }
 
 function arePassswordsSame(password, confirmedPassword){
-    return password === confirmedPassword;
+    return password !== confirmedPassword;
 }
 
 function markValidation(element, condition) {

@@ -175,9 +175,9 @@ class FarmRepository extends Repository
         $foundFields = $this->findFieldsByFarm($farm);
         $foundWorkers = $this->findWorkersByFarmId($farm);
 
-        $foundFarm = new Farm($farm['id'], $farm['name'], $farm['image'], $farm['token'],
+        $foundFarm = new Farm($farm['name'], $farm['image'], $farm['token'],
             new Address($farm['street'], $farm['city'], $farm['postal_code'], $farm['building_number']),
-            $foundFields, $foundWorkers);
+            $foundFields, $foundWorkers,$farm['id']);
         return $foundFarm;
     }
 }

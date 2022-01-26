@@ -5,7 +5,7 @@ class PersonalData extends BaseClass
     private  $firstName;
     private  $lastName;
     private  $address;
-    private $isOwner;
+    private  $isOwner;
 
 
     public function __construct($firstName, $lastName, $address, $isOwner)
