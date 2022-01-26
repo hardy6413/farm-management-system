@@ -95,7 +95,7 @@
                               </td>
                         <td class="record" id="tick-completed">
                             <label class="form-control" id="table-form-control">
-                            <input type="checkbox" name="checkbox" id="task-checkbox" />
+                            <input type="checkbox" name="checkbox" id="task-checkbox" checked />
                             <span class="checkmark"></span>
                         </label>
                     </td>

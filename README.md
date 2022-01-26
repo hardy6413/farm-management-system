@@ -50,7 +50,15 @@ zostały dodane przez jakiegokolwiek użytkownika należącego do wspólnego gos
 ![](AppScreenShots/fields.png)
 Pola można filtrować po nazwie dodawać, usuwać - przycisk kosza, oraz szukać akcji podając np nazwe akcji.
 
+Klikając "Past actions and notes" zostajemyprzeniesieni do konkretnych akcji które  robiliśmy na polu
+![](AppScreenShots/fieldOverview.png)
+
+Teraz poprzez klinięcie na odpowiedni wiersz w tabeli  uzyskujemy szczegółowe informacje na temat danej akcji.
+![](AppScreenShots/action.png)
+
+<br>
 Przycisk "settings" przenosi użytkownika do ustawień panujących na jego koncie
+
 ![](AppScreenShots/settings.png)
 
 Przycisk "account" przenosi użytkownika do strony w której może wykonywać działania na swoim koncie.
@@ -60,3 +68,15 @@ Przycisk "myFarm" włącza bądź wyłącza widok górnej nawigacji.
 
 Strona z poprzedniego zdjęcia po przyciśnięciu "myFarm"
 ![](AppScreenShots/myFarm.png)
+
+##Aplikacja mobilna
+
+Nikt nie będzie brał ze sobą na pole laptopa, ale każdy będzie miał przy sobie telefon - dlatego możliwe jest
+korzystanie z aplikacji również poprzez telefon
+![](AppScreenShots/loginMobile.png)
+
+![](AppScreenShots/mobileProfileOverview.png)![](AppScreenShots/menu.png)
+
+-> po przyciśnięciu "myFarm" wyświetla się dodatkowe menu
+![img.png](AppScreenShots/extraMenu.png)![](AppScreenShots/fieldsMobile.png)!
+[](AppScreenShots/workersMobile.png)
