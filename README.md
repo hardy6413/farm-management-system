@@ -78,5 +78,10 @@ korzystanie z aplikacji również poprzez telefon
 ![](AppScreenShots/mobileProfileOverview.png)![](AppScreenShots/menu.png)
 
 -> po przyciśnięciu "myFarm" wyświetla się dodatkowe menu
-![img.png](AppScreenShots/extraMenu.png)![](AppScreenShots/fieldsMobile.png)!
-[](AppScreenShots/workersMobile.png)
+![img.png](AppScreenShots/extraMenu.png)![](AppScreenShots/fieldsMobile.png)
+![](AppScreenShots/workersMobile.png)
+
+
+#Diagram Erd ![](erdPhpStorm.png)
+
+![](erdWorkbench.png)
