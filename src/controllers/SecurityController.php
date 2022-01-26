@@ -22,6 +22,9 @@ class SecurityController extends AppController
         $this->personalDataRepository = new PersonalDataRepository();
     }
 
+    public function index(){
+        $this->render('login');
+    }
 
     public function login(){
             if ($this->isPost() && $this->checkIfInputIsEmpty($this->messages)){
