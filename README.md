@@ -1,11 +1,16 @@
-#Farm Management System
+# Disclaimer - This is my project created during a subject on my university.It is written in a way so it meets the requirements. <br> Requirements can be seen here : https://ii.pk.edu.pl/~awidlak/content/25
+
+Previously the repo was created on bitbucket since it was a required however I decided to move it to my github.
+
+
+## Farm Management System
 
 Farm Management System to system pomagający w zarządzaniu i organizacji pracy w gospodarstwie rolnym. W przyszłości
 aplikacja może zostać rozbudowana by wspierać również inne typy gospodarstw np. gospodarstwa specjalizujące się 
 w sadownictwie bądź hodowli zwierząt.
 
 
-##Opis
+## Opis
 
 * Głównym założeniem aplikacji podczas jej tworzenia była prostota w użytkowaniu.Wymaganie to wynika z uwagi na to, że 
 w takich gospodarstwach często osoba pracująca nie ma czasu na staranne dokumentowanie wszystkich działań.Z kolei 
@@ -20,7 +25,7 @@ kroków można juz korzystać z funkcjonalności aplikacji.
 
 
 
-##Aplikacja
+## Aplikacja
 
 ![](AppScreenShots/login.png)
 
@@ -69,7 +74,7 @@ Przycisk "myFarm" włącza bądź wyłącza widok górnej nawigacji.
 Strona z poprzedniego zdjęcia po przyciśnięciu "myFarm"
 ![](AppScreenShots/myFarm.png)
 
-##Aplikacja mobilna
+## Aplikacja mobilna
 
 Nikt nie będzie brał ze sobą na pole laptopa, ale każdy będzie miał przy sobie telefon - dlatego możliwe jest
 korzystanie z aplikacji również poprzez telefon
