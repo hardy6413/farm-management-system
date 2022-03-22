@@ -1,4 +1,4 @@
-# Disclaimer - This is my project created during a subject on my university.It is written in a way so it meets the requirements. <br> Requirements can be seen here : https://ii.pk.edu.pl/~awidlak/content/25
+# Disclaimer - This is my project created during a subject on my university.It is written in a way so it meets the requirements. <br> Requirements can be seen here : https://ii.pk.edu.pl/~awidlak/content/25 - it was required to use PHP lanaguage - also it was my first touch with this language but thanks to the knowledge about web apps gained from other courses I was able to write it.
 
 Previously the repo was created on bitbucket since it was a required however I decided to move it to my github.
 
